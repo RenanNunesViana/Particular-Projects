@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Login page" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=1.0}" />
+</head>
+<body id="bodylogin">
+    <nav>
+        <img th:src="@{https://static.vecteezy.com/ti/fotos-gratis/p1/14378558-o-fundo-gradiente-desfocado-preto-e-cinza-escuro-tem-um-pouco-de-luz-abstrata-fundo-macio-para-papel-de-parede-design-grafico-e-apresentacao-parede-de-pano-de-fundo-foto.jpg}" alt="Logo da Empresa">
+    </nav>
+    <div class="login">
+        <form th:action="@{/login}" method='post' >
+            <h1 class="letra-login">Acesse sua conta</h1><br>
+            <br>
+            <input type="text" id="username" name="username" placeholder="Usuário" required>
+            <br><br>
+            <input type="password" id="password" name="password" placeholder="Senha" required>
+            <br><br>
+            <p><p><a href="#" class="ainda-nao">Ainda não possui uma conta?</a></p></p>
+            <p><p>
+            <button type="submit"><strong><h3>Confirmar</h3></strong></button></p></p>
+        </form> 
+    </div>
+    <footer>
+        <div class="divisores">
+        <h2 class="contato-sociais"><strong><b>Contatos</b></strong></h2>
+        <h2 class="localizacao"><strong><b>Encontre-nos</b></strong></h2>
+        </div>
+        <div class="contatos">
+            <a href="https://api.whatsapp.com/send?phone=5538988994036" class="logo-whatsapp"><img th:src="@{https://www.addtherm.com.br/wp-content/uploads/2018/02/Whatsapp-cinza.png}" alt="whatsapplogo"></a>
+            <section class="telefone"><a href="https://api.whatsapp.com/send?phone=5538988994036"><h3>(83) 9889 - 94036</h3></section></a>
+            <section class="barra-menor"></section>
+            <a th:href="@{https://www.instagram.com/cariocarfunilaria/}" class="logo-instagram"><img th:src="@{https://cdn.icon-icons.com/icons2/792/PNG/512/INSTAGRAM_icon-icons.com_65535.png}" alt="instagramlogo" class="logo-instagram"></a>
+            <section class="instagram-contato"><a th:href="@{https://www.instagram.com/cariocarfunilaria/}"><h3>@cariocarfunilaria</a></h3></section>
+            <section class="barra"></section> 
+            <section class="mapa-local"><a th:href="@{https://www.google.com/maps/place/Cariocar/@-7.1019771,-34.8623633,15z/data=!4m6!3m5!1s0x7acdd61df85628d:0x24ee748832dc3896!8m2!3d-7.1019771!4d-34.8623633!16s%2Fg%2F11h7nbkt0j?entry=ttu}">
+            <img th:src="@{https://img.freepik.com/icones-gratis/pointer_318-350509.jpg}" alt="mapa"></a></section>
+            <section class="endereco"><a th:href="@{https://www.google.com/maps/place/Cariocar/@-7.1019771,-34.8623633,15z/data=!4m6!3m5!1s0x7acdd61df85628d:0x24ee748832dc3896!8m2!3d-7.1019771!4d-34.8623633!16s%2Fg%2F11h7nbkt0j?entry=ttu}">
+            <h3>R. Sérgio Meira - Mandacaru, João Pessoa - PB, 58027-140</h3></section></a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cariocar</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=1.0}">
+</head>
+<body id="bodycadastro-usuario">
+    <nav>
+        <img th:src="@{https://static.vecteezy.com/ti/fotos-gratis/p1/14378558-o-fundo-gradiente-desfocado-preto-e-cinza-escuro-tem-um-pouco-de-luz-abstrata-fundo-macio-para-papel-de-parede-design-grafico-e-apresentacao-parede-de-pano-de-fundo-foto.jpg}" alt="Logo da Empresa">
+    </nav>
+    <div class="box-cadastro">
+    <form method='post' th:action="@{/car/register}" th:object ="${car}">
+        <h1 class="letra-cadastro">registre o carro</h1>
+        <input type="text" id="plate" th:field="*{car.plate}" placeholder="plate" required>
+        <input type="text" id="model" th:field= "*{car.model}" placeholder="model" required>
+        <input type="text" id="ownerCpf" th:field= "*{ownerCpf}" placeholder="ownerCpf" required>
+        <input type="number" id="age" th:field= "*{car.age}" placeholder="age" required>
+        <button type="submit" class="confirm-button"><strong><h3>Cadastrar</h3></strong></button>
+    </form>
+    </div>
+</body>
+</html>

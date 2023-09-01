@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cariocar</title>
+	<link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css}"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=1.0}">
+	<style>
+		th {
+			background-color: #880000;
+		}
+
+		td {
+			background-color: rgb(1, 1, 105);
+			color: white;
+		}
+
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swa');
+	</style>
+</head>
+
+<body id="bodycadastro">
+	<nav>
+		<img th:src="@{https://static.vecteezy.com/ti/fotos-gratis/p1/14378558-o-fundo-gradiente-desfocado-preto-e-cinza-escuro-tem-um-pouco-de-luz-abstrata-fundo-macio-para-papel-de-parede-design-grafico-e-apresentacao-parede-de-pano-de-fundo-foto.jpg}"
+			alt="Logo da Empresa">
+	</nav>
+	<div>
+		<br>
+		<table class="table">
+			<thead class=".table-striped">
+				<tr>
+					<th>Plate</th>
+					<th>Model</th>
+					<th>Owner Cpf</th>
+					<th>Age</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${cars.empty}">
+					<td colspan="2"> No cars registered </td>
+				</tr>
+				<tr th:each="car : ${cars}">
+					<td><span th:text="${car.plate}">Plate</span></td>
+					<td><span th:text="${car.model}">Model</span></td>
+					<td><span th:text="${car.owner.cpf}">Cpf</span></td>
+					<td><span th:text="${car.age}">Age</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

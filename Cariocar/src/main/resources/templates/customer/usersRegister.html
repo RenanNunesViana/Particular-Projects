@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cariocar</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=1.0}">
+</head>
+<body id="bodycadastro-usuario">
+    <nav>
+        <img th:src="@{https://static.vecteezy.com/ti/fotos-gratis/p1/14378558-o-fundo-gradiente-desfocado-preto-e-cinza-escuro-tem-um-pouco-de-luz-abstrata-fundo-macio-para-papel-de-parede-design-grafico-e-apresentacao-parede-de-pano-de-fundo-foto.jpg}" alt="Logo da Empresa">
+    </nav>
+    <div class="box-cadastro">
+    <form method='post' th:action="@{/customer/register}" th:object ="${user}">
+        <h1 class="letra-cadastro">Crie seu cadastro</h1>
+        <input type="text" id="cpf" th:field="*{cpf}" placeholder="CPF" required>
+        <input type="text" id="fisrtName" th:field= "*{firstName}" placeholder="First Name" required>
+        <input type="text" id="lastName" th:field= "*{lastName}" placeholder="Last Name" required>
+        <input type="password" id="password" th:field= "*{password}" placeholder="Senha" required>
+        <input type="text" id="telefone" th:field= "*{cel}" placeholder="Telefone" required>
+        <input type="email" id="email" th:field= "*{email}" placeholder="Email" required>
+        <button type="submit" class="confirm-button"><strong><h3>Cadastrar</h3></strong></button>
+    </form>
+    </div>
+    <footer class="footer-ajustavel">
+        <div class="divisores">
+        <h2 class="contato-sociais"><strong><b>Contatos</b></strong></h2>
+        <h2 class="localizacao"><strong><b>Encontre-nos</b></strong></h2>
+        </div>
+        <div class="contatos">
+            <a th:href="@{https://api.whatsapp.com/send?phone=5538988994036}" class="logo-whatsapp"><img th:src="@{https://www.addtherm.com.br/wp-content/uploads/2018/02/Whatsapp-cinza.png}" alt="whatsapplogo"></a>
+            <section class="telefone"><a th:href="@{https://api.whatsapp.com/send?phone=5538988994036}"><h3>(83) 9889 - 94036</h3></section></a>
+            <section class="barra-menor"></section>
+            <a th:href="@{https://www.instagram.com/cariocarfunilaria/}" class="logo-instagram"><img th:src="@{https://cdn.icon-icons.com/icons2/792/PNG/512/INSTAGRAM_icon-icons.com_65535.png}" alt="instagramlogo" class="logo-instagram"></a>
+            <section class="instagram-contato"><a href="https://www.instagram.com/cariocarfunilaria/"><h3>@cariocarfunilaria</a></h3></section>
+            <section class="barra"></section> 
+            <section class="mapa-local"><a href="https://www.google.com/maps/place/Cariocar/@-7.1019771,-34.8623633,15z/data=!4m6!3m5!1s0x7acdd61df85628d:0x24ee748832dc3896!8m2!3d-7.1019771!4d-34.8623633!16s%2Fg%2F11h7nbkt0j?entry=ttu">
+            <img th:src="@{https://img.freepik.com/icones-gratis/pointer_318-350509.jpg}" alt="mapa"></a></section>
+            <section class="endereco"><a href="https://www.google.com/maps/place/Cariocar/@-7.1019771,-34.8623633,15z/data=!4m6!3m5!1s0x7acdd61df85628d:0x24ee748832dc3896!8m2!3d-7.1019771!4d-34.8623633!16s%2Fg%2F11h7nbkt0j?entry=ttu">
+            <h3>R. Sérgio Meira - Mandacaru, João Pessoa - PB, 58027-140</h3></section></a>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cariocar</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=1.0}">
+</head>
+<body id="bodycadastro-usuario">
+    <nav>
+        <img th:src="@{https://static.vecteezy.com/ti/fotos-gratis/p1/14378558-o-fundo-gradiente-desfocado-preto-e-cinza-escuro-tem-um-pouco-de-luz-abstrata-fundo-macio-para-papel-de-parede-design-grafico-e-apresentacao-parede-de-pano-de-fundo-foto.jpg}" alt="Logo da Empresa">
+    </nav>
+    <div class="box-cadastro">
+    <form method='post' th:action="@{/order/register}" th:object ="${order}">
+        <h1 class="letra-cadastro">registre a ordem</h1>
+        <input type="text" id="description" th:field="*{description}" placeholder="description" required>
+        <input type="text" id="note" th:field= "*{note}" placeholder="note" required>
+        <input type="text" id="customerCpf" th:field= "*{customerCpf}" placeholder="customerCpf" required>
+        <input type="number" id="quote" th:field= "*{quote}" placeholder="quote" required>
+        <input type="text" id="carPlate" th:field= "*{carPlate}" placeholder="carPlate" required>
+        <button type="submit" class="confirm-button"><strong><h3>Cadastrar</h3></strong></button>
+    </form>
+    </div>
+</body>
+</html>
