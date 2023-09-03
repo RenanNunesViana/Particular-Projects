@@ -41,14 +41,13 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	CustomerService customerService;
-	
+
 	@Autowired
 	CarService carService;
-	
-	
+
 	@GetMapping(value = "/register")
 	public String register(HttpServletRequest request, HttpServletResponse response, Model model) {
 		User user = new User();
@@ -60,65 +59,59 @@ public class UserController {
 	public String createNewUser(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("user") User user) {
 
-		try {
+		user.setRole("USER");
 
-			user.setRole("USER");
+		userService.createUser(user);
 
-			userService.createUser(user);
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(user.getCpf(), user.getPassword()));
+		SecurityContext securityContext = SecurityContextHolder.getContext();
+		securityContext.setAuthentication(authentication);
+		HttpSession session = request.getSession(true);
+		session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
 
-			Authentication authentication = authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(user.getCpf(), user.getPassword()));
-			SecurityContext securityContext = SecurityContextHolder.getContext();
-			securityContext.setAuthentication(authentication);
-			HttpSession session = request.getSession(true);
-			session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
-
-			return "redirect:/";
-
-		} catch (Exception e) {
-			return "redirect:/register?error";
-		}
+		return "redirect:/";
 
 	}
-	
+
 	@GetMapping(value = "/list")
-	public String listCustomers(Model model){
-		List<User> customerList = userService.listUsers(); 
+	public String listCustomers(Model model) {
+		List<User> customerList = userService.listUsers();
 		model.addAttribute("customers", customerList);
 		return "customer/customersRegistered";
 	}
-	
+
 	@GetMapping(value = "/list/{id}")
-	public String getCustomer(@PathVariable("id") Long id, Model model){
-		model.addAttribute("id",id);
+	public String getCustomer(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("id", id);
 		User customer = userService.getById(id);
 		model.addAttribute("customer", customer);
 		return "customer/singleCustomerRegistered";
-		
+
 	}
-	
+
 	@PutMapping(value = "/editing/{id}")
-	public String editingCustomer(@PathVariable("id") Long id, @RequestBody User customer, Model model){
+	public String editingCustomer(@PathVariable("id") Long id, @RequestBody User customer, Model model) {
 		model.addAttribute("id", id);
 		try {
-		User editedCustomer = userService.getByCpf(customer.getCpf());
-		
-		if(editedCustomer == null)
-			return "customer/errors/idError";
-		
-		editedCustomer = userService.createUser(customer);
-		return "redirect:/customer/customerRegistered";
-		
-		}catch(Exception e) {
+			User editedCustomer = userService.getByCpf(customer.getCpf());
+
+			if (editedCustomer == null)
+				return "customer/errors/idError";
+
+			editedCustomer = userService.createUser(customer);
+			return "redirect:/customer/customerRegistered";
+
+		} catch (Exception e) {
 			return "customer/errors/idError";
 		}
 	}
 
 	@DeleteMapping(value = "/delete/{id}")
-	public String rmvCustomer(@PathVariable("id") Long id, Model model){
+	public String rmvCustomer(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("id", id);
 		userService.deleteUser(id);
 		return "redirect:/customer/customerRegistered";
 	}
-	
+
 }

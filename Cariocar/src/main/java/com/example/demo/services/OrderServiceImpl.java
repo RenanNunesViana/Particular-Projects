@@ -7,36 +7,46 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exception.OrderAlreadyExistException;
+import com.example.demo.exception.OrderNotFoundException;
 import com.example.demo.model.Order;
 import com.example.demo.repositories.OrderRepository;
 
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	OrderRepository orderRepository;
-	
+
 	@Override
-	public Optional<Order> createOrder(Order order) {
-		orderRepository.save(order);
-		return orderRepository.findById(order.getId());
+	public Order createOrder(Order order) {
+		Optional<Order> orderTmp = orderRepository.findById(order.getId());
+		if(orderTmp.isEmpty())
+			return orderRepository.save(order);
+		throw new OrderAlreadyExistException(order.getId());
+		
+				
 	}
 
 	@Override
-	public Optional<Order> editOrder(Long id, Order order) {
-		Order orderTmp = orderRepository.findById(id).get();
-		orderTmp.setCheckin(order.getCheckin());
-		orderTmp.setCheckout(order.getCheckout());
-		orderTmp.setCarPlate(order.getCarPlate());
-		orderTmp.setCustomerCpf(order.getCustomerCpf());
-		orderTmp.setDescription(order.getDescription());
-		orderTmp.setNote(order.getNote());
-		orderTmp.setPaymentStats(order.getPaymentStats());
-		orderTmp.setQuote(order.getQuote());
+	public Order editOrder(Long id, Order order) {
+		Optional<Order> orderOpt = orderRepository.findById(id);
+		if (orderOpt.isPresent()) {
+			Order orderTmp = orderOpt.get();
+			orderTmp.setCheckin(order.getCheckin());
+			orderTmp.setCheckout(order.getCheckout());
+			orderTmp.setCarPlate(order.getCarPlate());
+			orderTmp.setCustomerCpf(order.getCustomerCpf());
+			orderTmp.setDescription(order.getDescription());
+			orderTmp.setNote(order.getNote());
+			orderTmp.setPaymentStats(order.getPaymentStats());
+			orderTmp.setQuote(order.getQuote());
+
+			orderRepository.save(orderTmp);
+			return orderTmp;
+		}else
+			throw new OrderNotFoundException(id);
 		
-		orderRepository.save(orderTmp);
-		
-		return orderRepository.findById(orderTmp.getId());
 	}
 
 	@Override
@@ -45,8 +55,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Optional<Order> getOrder(Long id) {
-		return orderRepository.findById(id);
+	public Order getOrder(Long id) {
+		return orderRepository.findById(id)
+				.orElseThrow(()-> new OrderNotFoundException(id));
 	}
 
 	@Override
@@ -70,7 +81,7 @@ public class OrderServiceImpl implements OrderService{
 		orderRepository.delete(orderTmp.get());
 		return orderTmp;
 	}
-	
+
 	@Override
 	public void finishOrder(Long id) {
 		Order order = orderRepository.findById(id).get();
