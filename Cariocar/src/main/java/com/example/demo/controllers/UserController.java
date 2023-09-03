@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.services.CarService;
 import com.example.demo.services.CustomerService;
@@ -65,10 +65,6 @@ public class UserController {
 			user.setRole("USER");
 
 			userService.createUser(user);
-			Optional<User> newUser =userService.getByCpf(user.getCpf());
-			if (newUser.isEmpty()) {
-				return "redirect:/register?error";
-			}
 
 			Authentication authentication = authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(user.getCpf(), user.getPassword()));
@@ -93,22 +89,19 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/list/{id}")
-	public String getCustomer(@PathVariable("id") Long id, Model model) throws Exception {
+	public String getCustomer(@PathVariable("id") Long id, Model model){
 		model.addAttribute("id",id);
-		try {
-		User customer = userService.getById(id).get();
+		User customer = userService.getById(id);
 		model.addAttribute("customer", customer);
 		return "customer/singleCustomerRegistered";
-		}catch(Exception e) {
-			return "customer/errors/idError";
-		}
+		
 	}
 	
 	@PutMapping(value = "/editing/{id}")
 	public String editingCustomer(@PathVariable("id") Long id, @RequestBody User customer, Model model){
 		model.addAttribute("id", id);
 		try {
-		User editedCustomer = userService.getByCpf(customer.getCpf()).get();
+		User editedCustomer = userService.getByCpf(customer.getCpf());
 		
 		if(editedCustomer == null)
 			return "customer/errors/idError";
@@ -124,15 +117,8 @@ public class UserController {
 	@DeleteMapping(value = "/delete/{id}")
 	public String rmvCustomer(@PathVariable("id") Long id, Model model){
 		model.addAttribute("id", id);
-		try {
-		Optional<User> user = userService.getById(id);
-		if(user.isEmpty())
-			return "redirect:/customer/errors/idError";
 		userService.deleteUser(id);
 		return "redirect:/customer/customerRegistered";
-		}catch (Exception e) {
-			return "redirect:/customer/errors/idError";
-		}
 	}
 	
 }

@@ -92,11 +92,9 @@ public class OrderController {
 	}
 
 	@GetMapping
-	public String getOrderByCustomerCpf(String cpf, Model model) {
-		Optional<User> user = userService.getByCpf(cpf);
-		if (user.isEmpty())
-			return "redirect:/customer/errors/idError";
+	public String getOrderByCustomerCpf(String cpf, Model model) {		
 		try {
+			User user = userService.getByCpf(cpf);
 			List<Order> orders = orderService.getOrderByCustCpf(cpf);
 			model.addAttribute("orders", orders);
 			return "order/ordCustRegistered";

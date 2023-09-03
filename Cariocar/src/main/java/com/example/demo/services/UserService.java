@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.exception.UserAlreadyExistException;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repositories.UserRepository;
 
@@ -14,13 +17,15 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
     
-    public Optional<User> getByCpf(String cpf){
-        return userRepository.findByCpf(cpf);
+    public User getByCpf(String cpf){
+        return userRepository.findByCpf(cpf)
+        		.orElseThrow(() -> new UserNotFoundException(cpf));
         
     }
     
-    public Optional<User> getById(Long id){
-    	return userRepository.findById(id);
+    public User getById(Long id){
+    	return userRepository.findById(id)
+    			.orElseThrow(() -> new UserNotFoundException(id));
     }
     
     public User createUser(User user){
@@ -30,7 +35,7 @@ public class UserService {
         	userRepository.flush();
         	return userReturn;
         }
-        return null;
+        throw new UserAlreadyExistException(user.getCpf());
     }
     
     public void deleteUser(String cpf) {
@@ -50,7 +55,7 @@ public class UserService {
     		userTmp.get().setRole(user.getRole());
     		return userRepository.save(userTmp.get());
     	}
-    	return null;
+    	throw new UserNotFoundException(user.getCpf());
     }
     
     public List<User> listUsers(){

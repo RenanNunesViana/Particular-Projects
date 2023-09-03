@@ -50,14 +50,10 @@ public class CarController {
 		try {
 			Car car = carRegister.getCar();
 			String cpf = carRegister.getOwnerCpf();
-			Optional<User> user = userService.getByCpf(cpf);
 			Optional<Car> newCar = carService.getCar(car.getPlate());
 
 			if (newCar.isPresent())
 				return "redirect:/car/errors/idError";
-			if (user.isEmpty())
-				return "redirect:/customer/errors/idError";
-
 			carService.saveCar(car, cpf);
 
 			return "redirect:/car/list";
