@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.Car;
 import com.example.demo.model.CarRegister;
-import com.example.demo.model.User;
 import com.example.demo.services.CarService;
 import com.example.demo.services.UserService;
 

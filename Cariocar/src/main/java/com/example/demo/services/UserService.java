@@ -38,11 +38,14 @@ public class UserService {
         throw new UserAlreadyExistException(user.getCpf());
     }
     
-    public void deleteUser(String cpf) {
-    	userRepository.deleteByCpf(cpf);
+    public User deleteUser(String cpf) {
+    	return userRepository.deleteByCpf(cpf)
+    	.orElseThrow(()-> new UserNotFoundException(cpf));
     }
     
     public void deleteUser(Long id) {
+    	//getById is just to send an exception if needed
+    	getById(id);
     	userRepository.deleteById(id);
     }
     
