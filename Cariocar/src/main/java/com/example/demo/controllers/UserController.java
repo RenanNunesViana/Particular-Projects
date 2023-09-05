@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.services.CarService;
 import com.example.demo.services.CustomerService;
@@ -91,20 +89,10 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/editing/{id}")
-	public String editingCustomer(@PathVariable("id") Long id, @RequestBody User customer, Model model) {
+	public String editingCustomer(@PathVariable("id") Long id, @RequestBody User user, Model model) {
 		model.addAttribute("id", id);
-		try {
-			User editedCustomer = userService.getByCpf(customer.getCpf());
-
-			if (editedCustomer == null)
-				return "customer/errors/idError";
-
-			editedCustomer = userService.createUser(customer);
-			return "redirect:/customer/customerRegistered";
-
-		} catch (Exception e) {
-			return "customer/errors/idError";
-		}
+		userService.editUser(user);
+		return "redirect:/customer/customerRegistered";
 	}
 
 	@DeleteMapping(value = "/delete/{id}")

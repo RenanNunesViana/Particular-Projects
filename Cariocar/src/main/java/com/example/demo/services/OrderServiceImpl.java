@@ -78,15 +78,22 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Optional<Order> deleteOrder(Long id) {
 		Optional<Order> orderTmp = orderRepository.findById(id);
-		orderRepository.delete(orderTmp.get());
-		return orderTmp;
+		if(orderTmp.isPresent()) {
+			orderRepository.delete(orderTmp.get());
+			return orderTmp;
+		}else
+			throw new OrderNotFoundException(id);
+		
 	}
 
 	@Override
 	public void finishOrder(Long id) {
-		Order order = orderRepository.findById(id).get();
-		order.setCheckout(new Date());
-		orderRepository.save(order);
+		Optional<Order> order = orderRepository.findById(id);
+		if(order.isPresent()) {		
+			order.get().setCheckout(new Date());
+			orderRepository.save(order.get());
+		}else
+			throw new OrderNotFoundException(id);
 	}
 
 }

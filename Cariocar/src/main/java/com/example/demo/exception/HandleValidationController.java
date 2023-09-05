@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class HandleValidation {
+public class HandleValidationController {
 	
 	private static final String ERRORPAGE = "error";
 	
