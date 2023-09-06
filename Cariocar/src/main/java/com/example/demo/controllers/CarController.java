@@ -35,10 +35,15 @@ public class CarController {
 	UserService userService;
 
 	@GetMapping(value = "/register")
-	public String register(HttpServletRequest request, HttpServletResponse response, Model model) {
-		CarRegister car = new CarRegister();
+	public String register(HttpServletRequest request, HttpServletResponse response, String cpf, Model model) {
+		CarRegister car;
+		if(cpf == null){
+			car = new CarRegister();
+		}else{
+			car = new CarRegister(cpf, new Car());
+		}
 		model.addAttribute("car", car);
-		return "carsRegister";
+		return "car/carsRegister";
 	}
 
 	@PostMapping(value = "/register")
@@ -51,28 +56,28 @@ public class CarController {
 			carService.saveCar(car, cpf);
 
 			return "redirect:/car/list";
-
+			
 	}
 
 	@GetMapping(value = "/list")
 	public String listCars(Model model) {
 		List<Car> carList = carService.listCar();
 		model.addAttribute("cars", carList);
-		return "carsRegistered";
+		return "car/carsRegistered";
 	}
 
 	@GetMapping(value = "/{plate}")
 	public String getCar(@PathVariable String plate, Model model) {
 		Car carTmp = carService.getCar(plate);
 		model.addAttribute("car", carTmp);
-		return "redirect:/car/singleCarRegistered";
+		return "car/singleCarRegistered";
 
 	}
 
 	@PutMapping
 	public String editCar(@RequestBody Car car, String plate) {
 		carService.editCar(car, plate);
-		return "redirect:/car/carsRegistered";
+		return "redirect:/car/list";
 	}
 
 	@DeleteMapping(value = "/{plate}")

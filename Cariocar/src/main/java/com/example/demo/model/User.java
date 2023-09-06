@@ -112,5 +112,13 @@ public class User {
 	public void setCarsPlate(List<String> carsPlate) {
 		this.carsPlate = carsPlate;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
     
 }

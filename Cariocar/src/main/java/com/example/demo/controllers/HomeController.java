@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,4 +27,10 @@ public class HomeController {
     public String text() {
     	return "this is a free page to navagate";
     }
+    
+    @GetMapping(value = "/error")
+    public void error() {
+    	throw new IllegalArgumentException("testing error");
+    }
+    
 }
