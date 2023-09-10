@@ -29,6 +29,7 @@ public class UserService {
 	public User createUser(User user) {
 		Optional<User> userTmp = userRepository.findByCpf(user.getCpf());
 		if (userTmp.isEmpty()) {
+			user.setRole("USER");
 			User userReturn = userRepository.save(user);
 			userRepository.flush();
 			return userReturn;

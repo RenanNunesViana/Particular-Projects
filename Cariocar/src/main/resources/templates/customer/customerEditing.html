@@ -12,14 +12,14 @@
     </nav>
     <div class="box-edit">
     <form method='post' th:action="@{/customer/editing/{id}(id=${customer.id})}" th:object ="${customer}">
-        <h1 class="letra-cadastro">Crie seu cadastro</h1>
+        <h1 class="letra-cadastro">Edite seus dados</h1>
         <input type="text" id="cpf" th:field="*{cpf}" placeholder="CPF">
         <input type="text" id="fisrtName" th:field= "*{firstName}" placeholder="First Name">
         <input type="text" id="lastName" th:field= "*{lastName}" placeholder="Last Name">
         <input type="password" id="password" th:field= "*{password}" placeholder="Senha">
         <input type="text" id="telefone" th:field= "*{cel}" placeholder="Telefone">
         <input type="email" id="email" th:field= "*{email}" placeholder="Email">
-        <button type="submit" class="confirm-button"><strong><h3>Cadastrar</h3></strong></button>
+        <button type="submit" class="confirm-button"><strong><h3>Editar</h3></strong></button>
     </form>
     </div>
 </body>

@@ -36,8 +36,9 @@
 					<th>CPF</th>
 					<th>Celular</th>
 					<th>Email</th>
-					<th>editar</th>
 					<th>addCar</th>
+					<th>addOrder</th>
+					<th>editar</th>
 					<th>excluir</th>
 				</tr>
 			</thead>
@@ -50,8 +51,9 @@
 					<td><span th:text="${customer.cpf}">Cpf</span></td>
 					<td><span th:text="${customer.cel}">Cel</span></td>
 					<td><span th:text="${customer.email}">Email</span></td>
-					<td><a th:href="@{/customer/editing/{id}(id=${customer.id})}">Editar</a></td>
 					<td><a th:href="@{/car/register (cpf=${customer.cpf})}">addCar</a></td>
+					<td><a>addOrder</a></td>
+					<td><a th:href="@{/customer/editing/{id}(id=${customer.id})}">Editar</a></td>
 					<td><a th:href="@{/customer/delete/{id}(id=${customer.id})}">excluir</a></td>
 				</tr>
 			</tbody>

@@ -36,6 +36,8 @@
 					<th>Model</th>
 					<th>Owner Cpf</th>
 					<th>Age</th>
+					<th>Editar</th>
+					<th>Excluir</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,6 +49,8 @@
 					<td><span th:text="${car.model}">Model</span></td>
 					<td><span th:text="${car.owner.cpf}">Cpf</span></td>
 					<td><span th:text="${car.age}">Age</span></td>
+					<td><a th:href="@{/car/edit/{plate} (plate = ${car.plate})}">Editar</a></td>
+					<td><a th:href="@{/car/delete/{plate} (plate = ${car.plate})}">Excluir</a></td>
 				</tr>
 			</tbody>
 		</table>

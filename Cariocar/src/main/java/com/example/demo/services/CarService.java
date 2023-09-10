@@ -11,5 +11,5 @@ public interface CarService {
 	public Car editCar(Car car, String plate);
 	public List<Car> listCar();
 	public Car getCar(String plate);
-	public Optional<Car> deleteCar(String plate);
+	public Car deleteCar(String plate);
 }
