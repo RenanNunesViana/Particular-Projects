@@ -1,6 +1,8 @@
 package com.example.demo.exception;
 
-public class CarNotFoundException extends IllegalArgumentException{
+import jakarta.persistence.EntityNotFoundException;
+
+public class CarNotFoundException extends EntityNotFoundException{
 	
 	private static final long serialVersionUID = 1L;
 	

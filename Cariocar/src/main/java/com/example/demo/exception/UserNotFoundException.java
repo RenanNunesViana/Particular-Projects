@@ -1,13 +1,15 @@
 package com.example.demo.exception;
 
-public class UserNotFoundException extends IllegalArgumentException {
+import jakarta.persistence.EntityNotFoundException;
+
+public class UserNotFoundException extends EntityNotFoundException {
 	private static final long serialVersionUID = 1L;
 
 	public UserNotFoundException(String cpf){
-		super(String.format("usuario com cpf %d não encontrado", cpf));
+		super("fadsfasd");
 	}
 	
 	public UserNotFoundException(Long id) {
-		super(String.format("usuario %d não encontrado", id));
+		super("fdsfasdgf");
 	}
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cariocar</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=1.0}">
+</head>
+<body id="bodycadastro-usuario">
+    <nav>
+        <img th:src="@{https://static.vecteezy.com/ti/fotos-gratis/p1/14378558-o-fundo-gradiente-desfocado-preto-e-cinza-escuro-tem-um-pouco-de-luz-abstrata-fundo-macio-para-papel-de-parede-design-grafico-e-apresentacao-parede-de-pano-de-fundo-foto.jpg}" alt="Logo da Empresa">
+    </nav>
+    <div class="box-edit">
+    <form method='post' th:action="@{/customer/editing/{id}(id=${customer.id})}" th:object ="${customer}">
+        <h1 class="letra-cadastro">Crie seu cadastro</h1>
+        <input type="text" id="cpf" th:field="*{cpf}" placeholder="CPF">
+        <input type="text" id="fisrtName" th:field= "*{firstName}" placeholder="First Name">
+        <input type="text" id="lastName" th:field= "*{lastName}" placeholder="Last Name">
+        <input type="password" id="password" th:field= "*{password}" placeholder="Senha">
+        <input type="text" id="telefone" th:field= "*{cel}" placeholder="Telefone">
+        <input type="email" id="email" th:field= "*{email}" placeholder="Email">
+        <button type="submit" class="confirm-button"><strong><h3>Cadastrar</h3></strong></button>
+    </form>
+    </div>
+</body>
+</html>

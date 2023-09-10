@@ -8,6 +8,10 @@ public class CarRegister {
 		this.car = new Car();
 		this.ownerCpf = "";
 	}
+	public CarRegister(String cpf, Car car){
+		this.ownerCpf = cpf;
+		this.car = car;
+	}
 	public Car getCar() {
 		return car;
 	}

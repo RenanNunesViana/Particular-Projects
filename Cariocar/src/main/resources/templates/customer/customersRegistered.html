@@ -36,7 +36,9 @@
 					<th>CPF</th>
 					<th>Celular</th>
 					<th>Email</th>
-					<th>options</th>
+					<th>editar</th>
+					<th>addCar</th>
+					<th>excluir</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,25 +50,10 @@
 					<td><span th:text="${customer.cpf}">Cpf</span></td>
 					<td><span th:text="${customer.cel}">Cel</span></td>
 					<td><span th:text="${customer.email}">Email</span></td>
-					<td>
-						<form>
-							<select>
-								<option>edit</option>
-								<option>exclude</option>
-								<option>addCar</option>
-								<option>addOrder</option>
-							</select>
-							<button type="submit">select</button>
-						</form>
-					</td>
+					<td><a th:href="@{/customer/editing/{id}(id=${customer.id})}">Editar</a></td>
+					<td><a th:href="@{/car/register (cpf=${customer.cpf})}">addCar</a></td>
+					<td><a th:href="@{/customer/delete/{id}(id=${customer.id})}">excluir</a></td>
 				</tr>
-				<script>
-					$('button').click(function (event) {
-						if (event.target.tagName === 'BUTTON') {
-							alert('span pressed');
-						}
-					})
-				</script>
 			</tbody>
 		</table>
 	</div>

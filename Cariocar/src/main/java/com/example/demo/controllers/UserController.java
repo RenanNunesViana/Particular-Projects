@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,16 +12,12 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.services.CarService;
 import com.example.demo.services.CustomerService;
@@ -70,7 +65,7 @@ public class UserController {
 		HttpSession session = request.getSession(true);
 		session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
 
-		return "redirect:/";
+		return "redirect:/customer/list";
 
 	}
 
@@ -90,28 +85,24 @@ public class UserController {
 
 	}
 
-	@PutMapping(value = "/editing/{id}")
-	public String editingCustomer(@PathVariable("id") Long id, @RequestBody User customer, Model model) {
-		model.addAttribute("id", id);
-		try {
-			User editedCustomer = userService.getByCpf(customer.getCpf());
-
-			if (editedCustomer == null)
-				return "customer/errors/idError";
-
-			editedCustomer = userService.createUser(customer);
-			return "redirect:/customer/customerRegistered";
-
-		} catch (Exception e) {
-			return "customer/errors/idError";
-		}
+	@GetMapping(value ="/editing/{id}")
+	public String editingCustomer(@PathVariable("id") Long id, Model model) {
+		User user = userService.getById(id);
+		model.addAttribute("customer", user);
+		return "customer/customerEditing";
+	}
+	
+	
+	@PostMapping(value = "/editing/{id}")
+	public String editingCustomer(@PathVariable("id") Long id, @ModelAttribute("customer") User user, Model model) {
+		userService.editUser(user);
+		return "redirect:/customer/list";
 	}
 
-	@DeleteMapping(value = "/delete/{id}")
-	public String rmvCustomer(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("id", id);
+	@GetMapping(value = "/delete/{id}")
+	public String rmvCustomer(@PathVariable("id") Long id) {
 		userService.deleteUser(id);
-		return "redirect:/customer/customerRegistered";
+		return "redirect:/customer/list";
 	}
 
 }

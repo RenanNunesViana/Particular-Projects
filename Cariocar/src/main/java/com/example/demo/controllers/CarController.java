@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
-import java.util.List; 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,78 +35,56 @@ public class CarController {
 	UserService userService;
 
 	@GetMapping(value = "/register")
-	public String register(HttpServletRequest request, HttpServletResponse response, Model model) {
-		CarRegister car = new CarRegister();
+	public String register(HttpServletRequest request, HttpServletResponse response, String cpf, Model model) {
+		CarRegister car;
+		if(cpf == null){
+			car = new CarRegister();
+		}else{
+			car = new CarRegister(cpf, new Car());
+		}
 		model.addAttribute("car", car);
-		return "carsRegister";
+		return "car/carsRegister";
 	}
 
 	@PostMapping(value = "/register")
 	public String createNewCar(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("carRegister") CarRegister carRegister) {
-
-		try {
+		
 			Car car = carRegister.getCar();
 			String cpf = carRegister.getOwnerCpf();
-			Optional<Car> newCar = carService.getCar(car.getPlate());
 
-			if (newCar.isPresent())
-				return "redirect:/car/errors/idError";
 			carService.saveCar(car, cpf);
 
 			return "redirect:/car/list";
-
-		} catch (Exception e) {
-			return "redirect:/car/errors/idError";
-		}
-
+			
 	}
 
 	@GetMapping(value = "/list")
 	public String listCars(Model model) {
 		List<Car> carList = carService.listCar();
 		model.addAttribute("cars", carList);
-		return "carsRegistered";
+		return "car/carsRegistered";
 	}
 
 	@GetMapping(value = "/{plate}")
 	public String getCar(@PathVariable String plate, Model model) {
-		Optional<Car> carTmp = carService.getCar(plate);
-		if (carTmp.isEmpty())
-			return "redirect:/car/errors/plateError";
-		try {
-			model.addAttribute("car", carTmp.get());
-			return "redirect:/car/singleCarRegistered";
-		} catch (Exception e) {
-			return "redirect:/car/errors/plateError";
-		}
+		Car carTmp = carService.getCar(plate);
+		model.addAttribute("car", carTmp);
+		return "car/singleCarRegistered";
+
 	}
 
 	@PutMapping
-	public String editCar(@RequestBody Car car) {
-		Optional<Car> carTmp = carService.getCar(car.getPlate());
-		if (carTmp.isEmpty())
-			return "redirect:/car/errors/plateError";
-		try {
-			carService.editCar(car);
-			return "redirect:/car/carsRegistered";
-		} catch (Exception e) {
-			return "redirect:/car/errors/plateError";
-		}
-
+	public String editCar(@RequestBody Car car, String plate) {
+		carService.editCar(car, plate);
+		return "redirect:/car/list";
 	}
 
 	@DeleteMapping(value = "/{plate}")
 	public String deleteCar(@PathVariable String plate) {
-		Optional<Car> carTmp = carService.getCar(plate);
-		if (carTmp.isEmpty())
-			return "redirect:/car/errors/plateError";
-		try {
-			carService.deleteCar(plate);
-			return "redirect:/car/carsRegistered";
-		} catch (Exception e) {
-			return "redirect:/car/errors/plateError";
-		}
+		carService.deleteCar(plate);
+		return "redirect:/car/carsRegistered";
+
 	}
 
 }

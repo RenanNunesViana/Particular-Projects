@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exception.CarAlreadyExistException;
+import com.example.demo.exception.CarNotFoundException;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.model.Car;
 import com.example.demo.model.User;
 import com.example.demo.repositories.CarRepository;
@@ -23,31 +26,48 @@ public class CarServiceImpl implements CarService{
 
 	@Override
 	public Optional<Car> saveCar(Car car, String cpf) {
+		//checking if user exist and if the car there isn't
+		Optional<User> user = userRepository.findByCpf(cpf);
+		Optional<Car> carTmp = carRepository.findById(car.getPlate());
+		if(user.isEmpty())
+			throw new UserNotFoundException(cpf);
+		if(carTmp.isPresent())
+			throw new CarAlreadyExistException(car.getPlate());
+		
 		// adding a the new car plate to the customer
-		User user = userRepository.findByCpf(cpf).get();
-		List<String> carPlateList = user.getCarsPlate();
+		List<String> carPlateList = user.get().getCarsPlate();
 		carPlateList.add(car.getPlate());
-		user.setCarsPlate(carPlateList);
-		userRepository.save(user);
+		user.get().setCarsPlate(carPlateList);
+		userRepository.save(user.get());
 		
 		// setting the owner customer to the car
-		car.setOwner(user);
+		car.setOwner(user.get());
 		carRepository.save(car);
-		
+
 		return carRepository.findById(car.getPlate());
 		
 	}
 
 	@Override
-	public Optional<Car> editCar(Car car) {
-		/*Car carTmp = carRepository.findById(car.getPlate()).get();
+	public Car editCar(Car car, String plate) {
+		Car carTmp = carRepository.findById(plate)
+					.orElseThrow(()-> new CarNotFoundException(plate));
 		carTmp.setAge(car.getAge());
 		carTmp.setModel(car.getModel());
-		String plate = car.getPlate();
-		carRepository.deleteById(plate);
-		*/
-		carRepository.save(car);
-		return carRepository.findById(car.getPlate());
+		carTmp.setOwner(car.getOwner());
+		//if plates does not need be settled it just gone jump to save method
+		//
+		if(!car.getPlate().equals(plate)) {
+			carTmp.setPlate(plate);
+			carRepository.deleteById(plate);
+			User user = carTmp.getOwner();
+			List<String> plates = user.getCarsPlate();
+			plates.remove(plate);
+			user.setCarsPlate(plates);
+			userRepository.save(user);
+			carTmp.setOwner(user);
+		}
+		return carRepository.save(carTmp);
 	}
 
 	@Override
@@ -57,9 +77,9 @@ public class CarServiceImpl implements CarService{
 	}
 
 	@Override
-	public Optional<Car> getCar(String plate) {
-		Optional<Car> car = carRepository.findById(plate);
-		return car;
+	public Car getCar(String plate) {
+		return carRepository.findById(plate).
+				orElseThrow(()-> new CarNotFoundException(plate));
 	}
 
 	@Override
