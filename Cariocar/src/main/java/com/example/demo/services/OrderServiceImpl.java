@@ -20,9 +20,14 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order createOrder(Order order) {
-		Optional<Order> orderTmp = orderRepository.findById(order.getId());
-		if(orderTmp.isEmpty())
+		if(order.getId() == null)
 			return orderRepository.save(order);
+		else{
+			Optional<Order> orderTmp = orderRepository.findById(order.getId());
+			if(orderTmp.isEmpty()){
+				return orderRepository.save(order);
+			}
+		}
 		throw new OrderAlreadyExistException(order.getId());
 		
 				

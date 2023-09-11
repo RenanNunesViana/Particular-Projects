@@ -3,8 +3,6 @@ package com.example.demo.controllers;
 import com.example.demo.model.Order;
 import com.example.demo.services.OrderService;
 import com.example.demo.services.UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,15 +25,14 @@ public class OrderController {
 	UserService userService;
 
 	@GetMapping(value = "/register")
-	public String register(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String register(Model model) {
 		Order order = new Order();
 		model.addAttribute("order", order);
 		return "order/ordersRegister";
 	}
 
 	@PostMapping(value = "/register")
-	public String createNewOrder(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("order") Order order) {
+	public String createNewOrder(@ModelAttribute("order") Order order) {
 		orderService.createOrder(order);
 		return "redirect:/order/list";
 	}
@@ -80,15 +77,22 @@ public class OrderController {
 		return "order/ordersRegistered";
 	}
 
-	@PutMapping(value = "{id}")
-	public String editOrder(@PathVariable("id") Long id, @ModelAttribute("order") Order order) {
-		orderService.editOrder(order.getId(), order);
-		return "order/orderRegistered";
+	@GetMapping(value = "/edit/{id}")
+	public String editOrder(@PathVariable("id") Long id, Model model){
+		Order order = orderService.getOrder(id);
+		model.addAttribute("order", order);
+		return "order/orderEditing";
 	}
 
-	@DeleteMapping
-	public String deletingOrder(Long id) {
+	@PostMapping(value = "/edit/{id}")
+	public String editOrder(@PathVariable("id") Long id, @ModelAttribute("order") Order order) {
+		orderService.editOrder(order.getId(), order);
+		return "redirect:/order/list";
+	}
+
+	@GetMapping(value = "/delete/{id}")
+	public String deletingOrder(@PathVariable("id") Long id) {
 		orderService.deleteOrder(id);
-		return "order/orderRegistered";
+		return "redirect:/order/list";
 	}
 }

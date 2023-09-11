@@ -14,11 +14,14 @@
     <form method='post' th:action="@{/order/register}" th:object ="${order}">
         <h1 class="letra-cadastro">registre a ordem</h1>
         <input type="text" id="description" th:field="*{description}" placeholder="description" required>
-        <input type="text" id="note" th:field= "*{note}" placeholder="note" required>
-        <input type="text" id="customerCpf" th:field= "*{customerCpf}" placeholder="customerCpf" required>
+        <input type="text" id="note" th:field= "*{note}" placeholder="note">
+        <input type="text" id="customerCpf" th:field= "*{customerCpf}" name="cpf" placeholder="customerCpf" required>
         <input type="number" id="quote" th:field= "*{quote}" placeholder="quote" required>
         <input type="text" id="carPlate" th:field= "*{carPlate}" placeholder="carPlate" required>
-        <button type="submit" class="confirm-button"><strong><h3>Cadastrar</h3></strong></button>
+        <select name="paymentStats">
+            <option th:each="status :${T(com.example.demo.utilits.PaymentStats).values()}" th:value="${status}" th:text="${status}"></option>
+        </select>
+        <button type="submit" class="confirm-button"><strong><h3>registrar</h3></strong></button>
     </form>
     </div>
 </body>

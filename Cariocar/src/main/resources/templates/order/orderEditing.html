@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Editing</title>
+    <title>Cariocar</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css?v=1.0}">
 </head>
 <body id="bodycadastro-usuario">
@@ -11,14 +11,16 @@
         <img th:src="@{https://static.vecteezy.com/ti/fotos-gratis/p1/14378558-o-fundo-gradiente-desfocado-preto-e-cinza-escuro-tem-um-pouco-de-luz-abstrata-fundo-macio-para-papel-de-parede-design-grafico-e-apresentacao-parede-de-pano-de-fundo-foto.jpg}" alt="Logo da Empresa">
     </nav>
     <div class="box-edit">
-    <form method='post' th:action="@{/customer/editing/{id}(id=${customer.id})}" th:object ="${customer}">
+    <form method='post' th:action="@{/order/edit/{id}(id=${order.id})}" th:object ="${order}">
         <h1 class="letra-cadastro">Edite seus dados</h1>
-        <input type="text" id="cpf" th:field="*{cpf}" placeholder="CPF">
-        <input type="text" id="firstName" th:field= "*{firstName}" placeholder="First Name">
-        <input type="text" id="lastName" th:field= "*{lastName}" placeholder="Last Name">
-        <input type="password" id="password" th:field= "*{password}" placeholder="Senha">
-        <input type="text" id="telefone" th:field= "*{cel}" placeholder="Telefone">
-        <input type="email" id="email" th:field= "*{email}" placeholder="Email">
+        <input type="text" id="description" th:field="*{description}" placeholder="descrição">
+        <input type="text" id="note" th:field= "*{note}" placeholder="observação">
+        <input type="text" id="customerCpf" th:field= "*{customerCpf}" placeholder="cpf do cliente">
+        <input type="text" id="carPlate" th:field= "*{carPlate}" placeholder="placa">
+        <input type="number" id="quote" th:field= "*{quote}" placeholder="orçamento">
+        <select name="paymentStats">
+            <option th:each="status :${T(com.example.demo.utilits.PaymentStats).values()}" th:value="${status}" th:text="${status}"></option>
+        </select>
         <button type="submit" class="confirm-button"><strong><h3>Editar</h3></strong></button>
     </form>
     </div>
