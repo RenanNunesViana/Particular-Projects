@@ -6,17 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.model.Car;
 import com.example.demo.model.CarRegister;
+import com.example.demo.model.User;
 import com.example.demo.services.CarService;
 import com.example.demo.services.UserService;
 
@@ -74,16 +72,25 @@ public class CarController {
 
 	}
 
-	@PutMapping
-	public String editCar(@RequestBody Car car, String plate) {
+	@GetMapping(value = "edit/{plate}")
+	public String editCarView(Car car, Model model){
+		Car carTmp = carService.getCar(car.getPlate());
+		model.addAttribute("car", carTmp);
+		return "car/carEditing";
+	}
+
+	@PostMapping(value = "/edit/{plate}")
+	public String editCar(@ModelAttribute("car") Car car, @PathVariable("plate") String plate) {
+		User user = carService.getCar(plate).getOwner();
+		car.setOwner(user);
 		carService.editCar(car, plate);
 		return "redirect:/car/list";
 	}
 
-	@DeleteMapping(value = "/{plate}")
-	public String deleteCar(@PathVariable String plate) {
+	@GetMapping(value = "/delete/{plate}")
+	public String deleteCar(@PathVariable("plate") String plate) {
 		carService.deleteCar(plate);
-		return "redirect:/car/carsRegistered";
+		return "redirect:/car/list";
 
 	}
 

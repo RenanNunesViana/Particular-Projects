@@ -34,11 +34,12 @@ public class User {
     @Column(name = "EMAIL")
 	private String email;
     
-    @Column(name = "CARSPLATE")
-    private List<String> carsPlate;
+    @Column(name = "CARS")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> cars;
 
     public User() {
-     this.carsPlate = new ArrayList<>();	
+     this.cars = new ArrayList<>();	
     }
     
     public User(String cpf, String password, String firstName, String lastName) {
@@ -46,7 +47,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.carsPlate = new ArrayList<>();
+        this.cars = new ArrayList<>();
     }
 
 	public String getCpf() {
@@ -105,12 +106,12 @@ public class User {
 		this.email = email;
 	}
 
-	public List<String> getCarsPlate() {
-		return carsPlate;
+	public List<Car> getCars() {
+		return cars;
 	}
 
-	public void setCarsPlate(List<String> carsPlate) {
-		this.carsPlate = carsPlate;
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
 	}
 
 	public Long getId() {

@@ -78,7 +78,6 @@ public class UserController {
 
 	@GetMapping(value = "/list/{id}")
 	public String getCustomer(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("id", id);
 		User customer = userService.getById(id);
 		model.addAttribute("customer", customer);
 		return "customer/singleCustomerRegistered";
@@ -94,7 +93,7 @@ public class UserController {
 	
 	
 	@PostMapping(value = "/editing/{id}")
-	public String editingCustomer(@PathVariable("id") Long id, @ModelAttribute("customer") User user, Model model) {
+	public String editingCustomer(@PathVariable("id") Long id, @ModelAttribute("customer") User user) {
 		userService.editUser(user);
 		return "redirect:/customer/list";
 	}

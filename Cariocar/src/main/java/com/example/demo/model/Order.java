@@ -1,12 +1,9 @@
 package com.example.demo.model;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.example.demo.utilits.PaymentStats;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

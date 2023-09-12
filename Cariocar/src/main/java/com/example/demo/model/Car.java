@@ -11,7 +11,7 @@ public class Car {
 	
 	@Id
 	private String plate;
-	private String Model;
+	private String model;
 	
 	@ManyToOne
 	private User owner;
@@ -19,6 +19,12 @@ public class Car {
 	
 	public Car() {
 		
+	}
+
+	public Car(String plate, String model, Integer age){
+		this.plate = plate;
+		this.model = model;
+		this.age = age;
 	}
 
 	public String getPlate() {
@@ -30,11 +36,11 @@ public class Car {
 	}
 
 	public String getModel() {
-		return Model;
+		return model;
 	}
 
 	public void setModel(String model) {
-		Model = model;
+		this.model = model;
 	}
 
 	public User getOwner() {

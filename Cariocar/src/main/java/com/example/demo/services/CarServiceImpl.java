@@ -3,6 +3,8 @@ package com.example.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,26 @@ public class CarServiceImpl implements CarService{
 	@Autowired
 	private UserRepository userRepository;
 
+	//auxiliar method to remove or add cars from users. command must be rmv or add.
+	private void alterCarToUser(Car car, User user, String command){
+		List<Car> cars = user.getCars();
+		
+		if(command.equals("add")){
+			cars.add(car);
+			user.setCars(cars);
+			car.setOwner(user);
+			userRepository.save(user);
+			carRepository.save(car);
+		}else
+		if(command.equals("rmv")){
+			cars.remove(car);
+			user.setCars(cars);
+			userRepository.save(user);
+			carRepository.delete(car);
+		}else
+			throw new RuntimeErrorException(new Error("use rmv to remove or add to save"));
+	}
+
 	@Override
 	public Optional<Car> saveCar(Car car, String cpf) {
 		//checking if user exist and if the car there isn't
@@ -35,9 +57,9 @@ public class CarServiceImpl implements CarService{
 			throw new CarAlreadyExistException(car.getPlate());
 		
 		// adding a the new car plate to the customer
-		List<String> carPlateList = user.get().getCarsPlate();
-		carPlateList.add(car.getPlate());
-		user.get().setCarsPlate(carPlateList);
+		List<Car> carsList = user.get().getCars();
+		carsList.add(car);
+		user.get().setCars(carsList);
 		userRepository.save(user.get());
 		
 		// setting the owner customer to the car
@@ -54,20 +76,16 @@ public class CarServiceImpl implements CarService{
 					.orElseThrow(()-> new CarNotFoundException(plate));
 		carTmp.setAge(car.getAge());
 		carTmp.setModel(car.getModel());
-		carTmp.setOwner(car.getOwner());
 		//if plates does not need be settled it just gone jump to save method
-		//
 		if(!car.getPlate().equals(plate)) {
-			carTmp.setPlate(plate);
-			carRepository.deleteById(plate);
-			User user = carTmp.getOwner();
-			List<String> plates = user.getCarsPlate();
-			plates.remove(plate);
-			user.setCarsPlate(plates);
-			userRepository.save(user);
-			carTmp.setOwner(user);
+			alterCarToUser(carTmp, carTmp.getOwner(), "rmv");
+			carTmp.setPlate(car.getPlate());
+			alterCarToUser(carTmp, carTmp.getOwner(), "add");
+			return carTmp;
+		}else{
+			return carRepository.save(carTmp);
 		}
-		return carRepository.save(carTmp);
+		
 	}
 
 	@Override
@@ -83,18 +101,13 @@ public class CarServiceImpl implements CarService{
 	}
 
 	@Override
-	public Optional<Car> deleteCar(String plate) {
-		Optional<Car> car = carRepository.findById(plate);
+	public Car deleteCar(String plate) {
+		Car car = carRepository.findById(plate)
+					.orElseThrow(()-> new CarNotFoundException(plate));
 		
-		// deleting car plate from the owner list of cars plate 
-		User user = car.get().getOwner();
-		List<String> plateListCustomer = user.getCarsPlate();
-		plateListCustomer.remove(plate);
-		user.setCarsPlate(plateListCustomer);
-		userRepository.save(user);
-		
-	
-		carRepository.deleteById(plate);
+		// deleting car plate from the owner list of cars plate and
+		// removing it from DB
+		alterCarToUser(car, car.getOwner(), "rmv");
 		return car;
 	}
 
