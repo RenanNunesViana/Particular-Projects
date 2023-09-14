@@ -48,9 +48,17 @@ public class OrderController {
 	}
 
 	@GetMapping(value = "/list")
-	public String findAll(Model model) {
-		List<Order> orders = orderService.listOrders();
-		model.addAttribute("orders", orders);
+	public String findAll(Model model, String beg, String end) throws ParseException{
+		if((beg == null) || (end == null) || beg == "" || end == ""){
+			List<Order> orders = orderService.listOrders();
+			model.addAttribute("orders", orders);		
+		}else{
+			SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+			Date date1 = format.parse(beg);
+			Date date2 = format.parse(end);
+			List<Order> orders = orderService.getOrderByDate(date1, date2);
+			model.addAttribute("orders", orders);
+		}
 		return "order/ordersRegistered";
 	}
 

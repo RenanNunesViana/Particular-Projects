@@ -29,6 +29,11 @@
 	</nav>
 	<div>
 		<br>
+		<form th:action="@{/order/list}" method="get">
+			<input type="date" name="beg" th:value="${beg}" placeholder="checkin inicial">
+			<input type="date" name="end" th:value="${end}" placeholder="checkin final">
+			<button type="submit" class="btn btn-info">Pesquisar</button>
+		</form>
 		<table class="table">
 			<thead class=".table-striped">
 				<tr>
