@@ -17,6 +17,10 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+/* 	public UserService(UserRepository userRepository){
+		this.userRepository = userRepository;
+	} */
+
 	public User getByCpf(String cpf) {
 		return userRepository.findByCpf(cpf).orElseThrow(() -> new UserNotFoundException(cpf));
 
