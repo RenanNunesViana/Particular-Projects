@@ -1,0 +1,70 @@
+<app-find-user (searchTextChanged)="onSearchTextEntered($event)"  ></app-find-user>
+
+<div >
+<table *ngIf="ds$ | async as userDataSource; else loading" mat-table [dataSource]="userDataSource" class="mat-elevation-z8 demo-table">
+  <mat-spinner></mat-spinner>
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let user">
+
+      {{user.id}}
+
+    </td>
+  </ng-container>
+
+  <!-- Cpf Column -->
+  <ng-container matColumnDef="cpf">
+    <th mat-header-cell *matHeaderCellDef>CPF</th>
+    <td mat-cell *matCellDef="let user">
+
+        {{user.cpf}}
+
+    </td>
+  </ng-container>
+
+  <!-- firstName Column -->
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef>first name</th>
+    <td mat-cell *matCellDef="let user">
+
+      {{user.firstName}}
+
+    </td>
+  </ng-container>
+
+  <!-- lastName Column -->
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef>Last Name</th>
+    <td mat-cell *matCellDef="let user">
+
+      {{user.lastName}}
+
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cel">
+    <th mat-header-cell *matHeaderCellDef>Celphone</th>
+    <td mat-cell *matCellDef="let user">
+
+        {{user.cel}}
+
+    </td>
+
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let user">
+
+      {{user.email}}
+
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>

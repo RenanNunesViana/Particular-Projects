@@ -1,0 +1,21 @@
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Plate</mat-label>
+    <input matInput formControlName="plate">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Model</mat-label>
+    <input matInput formControlName="model">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Age</mat-label>
+    <input matInput formControlName="age">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Owner CPF</mat-label>
+    <input matInput formControlName="ownerCpf">
+  </mat-form-field>
+  <p>Complete the form to enable button.</p>
+  <button type="submit">Submit</button>
+</form>
+

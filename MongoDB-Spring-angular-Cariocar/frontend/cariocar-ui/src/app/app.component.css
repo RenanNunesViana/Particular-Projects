@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para o cabeçalho */
+header {
+  background-color: #333; /* Cor de fundo do cabeçalho */
+  color: #fff; /* Cor do texto no cabeçalho */
+  text-align: center; /* Alinhar o texto ao centro */
+  padding: 20px; /* Espaçamento interno no cabeçalho */
+}
+
+/* Estilos para o menu de navegação no cabeçalho */
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px; /* Espaçamento entre os itens do menu */
+}
+
+/* Estilos para o rodapé */
+footer {
+  background-color: #333; /* Cor de fundo do rodapé */
+  color: #fff; /* Cor do texto no rodapé */
+  text-align: center; /* Alinhar o texto ao centro */
+  padding: 10px; /* Espaçamento interno no rodapé */
+  position: absolute;
+  bottom: 0; /* Alinhar na parte inferior da tela */
+  width: 100%; /* Ocupar toda a largura horizontal */
+}
