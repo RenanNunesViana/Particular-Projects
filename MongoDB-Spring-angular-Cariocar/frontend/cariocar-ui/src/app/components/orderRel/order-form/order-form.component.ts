@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {OrderService} from "../../services/order/order.service";
-import {PaymentStats} from "../../models/payment-stats";
+import {OrderService} from "../../../services/order/order.service";
+import {PaymentStats} from "../../../models/payment-stats";
 
 @Component({
   selector: 'app-order-form',

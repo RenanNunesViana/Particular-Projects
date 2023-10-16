@@ -1,0 +1,25 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userToEditId)">
+
+  <mat-form-field>
+    <mat-label>CPF</mat-label>
+    <input matInput formControlName="cpf">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Celphone</mat-label>
+    <input matInput formControlName="cel">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+  <p>Complete the form to enable button.</p>
+  <button type="submit">Submit</button>
+</form>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {UserService} from "../../services/user/user.service";
+import {UserService} from "../../../services/user/user.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -18,10 +18,9 @@ export class UserFormComponent {
     email: new FormControl('', Validators.required),
   })
 
-  constructor(private router: Router,
-              private userService: UserService) { }
+  constructor(private userService: UserService) { }
   onSubmit() {
-    this.userService.save(this.userForm.value).subscribe(result=>{})
+    this.userService.save(this.userForm.value).subscribe(()=>{})
     this.userForm.reset();
     window.location.reload();
   }

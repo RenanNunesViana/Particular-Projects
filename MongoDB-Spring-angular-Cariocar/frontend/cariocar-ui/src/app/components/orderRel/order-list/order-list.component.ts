@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
-import {Order} from "../../models/order";
-import {OrderService} from "../../services/order/order.service";
+import {Order} from "../../../models/order";
+import {OrderService} from "../../../services/order/order.service";
 
 @Component({
   selector: 'app-order-list',
@@ -10,7 +10,7 @@ import {OrderService} from "../../services/order/order.service";
   styleUrls: ['./order-list.component.css']
 })
 export class OrderListComponent implements OnInit{
-  displayedColumns:string[] = ['description','customerCpf','checkin','quote','paymentStats']
+  displayedColumns:string[] = ['description','customerCpf','checkin','quote','paymentStats', 'options']
   dataSource=new MatTableDataSource<Order>()
   searchString:string =''
 

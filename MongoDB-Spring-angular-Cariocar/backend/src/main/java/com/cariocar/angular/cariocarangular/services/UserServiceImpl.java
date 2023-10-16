@@ -47,9 +47,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User editUser(User user) {
+    public User editUser(Long id, User user) {
 
-        Optional<User> userTmp = userRepository.findById(user.getId());
+        Optional<User> userTmp = userRepository.findById(id);
         if(userTmp.isPresent()) {
             User userToUpdate = userTmp.get();
             if (user.getCpf()!=null)

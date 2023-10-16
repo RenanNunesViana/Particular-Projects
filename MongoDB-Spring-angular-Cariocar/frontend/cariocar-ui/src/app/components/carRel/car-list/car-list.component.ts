@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {Car} from "../../models/car";
-import {CarService} from "../../services/car/car.service";
+import {Car} from "../../../models/car";
+import {CarService} from "../../../services/car/car.service";
 import {async} from "rxjs";
 
 @Component({
@@ -10,7 +10,7 @@ import {async} from "rxjs";
   styleUrls: ['./car-list.component.css']
 })
 export class CarListComponent implements OnInit{
-  displayedColumns:string[] = ['plate', 'model', 'age','ownerCpf'];
+  displayedColumns:string[] = ['plate', 'model', 'age','ownerCpf', 'options'];
   dataSource = new MatTableDataSource<Car>();
   //searchString:string = ''
 

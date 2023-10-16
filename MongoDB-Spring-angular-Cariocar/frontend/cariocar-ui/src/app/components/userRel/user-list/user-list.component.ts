@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../../models/user";
-import {UserService} from "../../services/user/user.service";
+import {User} from "../../../models/user";
+import {UserService} from "../../../services/user/user.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {map, Observable} from "rxjs";
 
@@ -10,7 +10,7 @@ import {map, Observable} from "rxjs";
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'cpf', 'firstName', 'lastName', 'cel','email'];
+  displayedColumns: string[] = ['cpf', 'firstName', 'lastName', 'cel', 'options'];
   ds:MatTableDataSource<User>;
   searchString = ''
   ds$:Observable<MatTableDataSource<User>>;
@@ -36,5 +36,9 @@ export class UserListComponent implements OnInit{
     this.searchString = searchValue;
 
     console.log(this.searchString)
+  }
+
+  setUserToEditId(id:bigint){
+    this.userService.setUserToEditId(id);
   }
 }

@@ -11,7 +11,7 @@ public interface UserService {
     public User createUser(User user);
     public User deleteUser(String cpf);
     public void deleteUser(Long id);
-    public User editUser(User user);
+    public User editUser(Long id, User user);
     public List<User> listUser();
     public List<User> listUsers(String name);
 }

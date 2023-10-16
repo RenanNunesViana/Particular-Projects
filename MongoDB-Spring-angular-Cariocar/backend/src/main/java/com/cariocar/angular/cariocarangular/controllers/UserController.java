@@ -40,7 +40,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteUser(@PathVariable Long id){userService.deleteUser(id);}
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/edit/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public User editUser(@PathVariable Long id, @RequestBody User user){return userService.editUser(user);}
+    public User editUser(@PathVariable Long id, @RequestBody User user){return userService.editUser(id, user);}
 }
