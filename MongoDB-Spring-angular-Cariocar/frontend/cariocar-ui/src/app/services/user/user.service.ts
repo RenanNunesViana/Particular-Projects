@@ -21,9 +21,10 @@ export class UserService {
       return this.http.get<User[]>(this.userUrl);
   }
 
-  /*public findAllThatContains(searchValue:string){
-    return this.http.get<User[]>(this.userUrl + `/find`);
-  }*/
+  public findUser(id:bigint):Observable<User>{
+    return this.http.get<User>(this.userUrl + `/${id}`)
+  }
+
   public save(user: ɵTypedOrUntyped<{
     firstName: FormControl<string | null>;
     lastName: FormControl<string | null>;
@@ -68,7 +69,7 @@ export class UserService {
     this.userToEditId$.next(id);
   }
 
-  getUserToEditId(){
+/*  getUserToEditId(){
     return this.selectedUserId$;
-  }
+  }*/
 }

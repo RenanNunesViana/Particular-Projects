@@ -1,0 +1,19 @@
+<div class="user-details">
+  <div class="user-avatar">
+    <img src="#" alt="Imagem do Usuário">
+  </div>
+  <div class="user-info">
+    <h2>Usuário: {{ user.firstName + " " + user.lastName}}</h2>
+    <p>CPF: {{ user.cpf }}</p>
+    <p>Telefone/Celular {{ user.cel }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Carros cadastrados:</p>
+    <ul *ngFor="let car of user.cars">
+      <li>{{car.plate}}</li>
+      <li>{{car.model}}, {{car.age}}</li>
+    </ul>
+
+
+  </div>
+</div>
+

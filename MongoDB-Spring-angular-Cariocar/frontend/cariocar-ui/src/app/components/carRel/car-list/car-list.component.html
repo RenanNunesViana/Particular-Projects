@@ -1,7 +1,7 @@
 <!--<app-car-list (searchTextChanged)="onSearchTextEntered($event)"  ></app-car-list>-->
-
+<app-find-bar (searchTextChanged)="onSearchTextEntered($event)" [placeHold]="placeHoldMsg"></app-find-bar>
 <div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  <table *ngIf="ds$ | async as carDataSource; else loading" mat-table [dataSource]="carDataSource" class="mat-elevation-z8 demo-table">
     <!-- Plate Column -->
     <ng-container matColumnDef="plate">
       <th mat-header-cell *matHeaderCellDef>Plate</th>
@@ -61,3 +61,4 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>

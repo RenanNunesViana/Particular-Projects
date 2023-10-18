@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public User showUser(@PathVariable Long id){return userService.getById(id);}
 
     @GetMapping(value = "/find/{name}")

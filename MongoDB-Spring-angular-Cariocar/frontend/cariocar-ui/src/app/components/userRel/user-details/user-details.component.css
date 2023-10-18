@@ -1,0 +1,37 @@
+.user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.user-avatar {
+  flex: 0 0 30%;
+  max-width: 30%;
+}
+
+.user-avatar img {
+  max-width: 100%;
+  height: auto;
+}
+
+.user-info {
+  flex: 0 0 70%;
+  max-width: 70%;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .user-details {
+    flex-direction: column;
+  }
+
+  .user-avatar {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .user-info {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

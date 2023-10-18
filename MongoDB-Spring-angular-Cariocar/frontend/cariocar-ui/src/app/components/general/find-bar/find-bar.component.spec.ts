@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FindUserComponent } from './find-user.component';
+import { FindBarComponent } from './find-bar.component';
 
-describe('FindUserComponent', () => {
-  let component: FindUserComponent;
-  let fixture: ComponentFixture<FindUserComponent>;
+describe('FindBarComponent', () => {
+  let component: FindBarComponent;
+  let fixture: ComponentFixture<FindBarComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FindUserComponent]
+      declarations: [FindBarComponent]
     });
-    fixture = TestBed.createComponent(FindUserComponent);
+    fixture = TestBed.createComponent(FindBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

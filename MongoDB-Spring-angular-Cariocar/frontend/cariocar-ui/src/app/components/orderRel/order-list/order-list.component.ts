@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
 import {Order} from "../../../models/order";
 import {OrderService} from "../../../services/order/order.service";
+import {map, Observable} from "rxjs";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-order-list',
@@ -11,16 +13,38 @@ import {OrderService} from "../../../services/order/order.service";
 })
 export class OrderListComponent implements OnInit{
   displayedColumns:string[] = ['description','customerCpf','checkin','quote','paymentStats', 'options']
-  dataSource=new MatTableDataSource<Order>()
-  searchString:string =''
+  ds:MatTableDataSource<Order>;
+  ds$:Observable<MatTableDataSource<Order>>
+  fromDate!: Date
+  toDate!:Date
+  pipe!:DatePipe;
 
   constructor(private orderService:OrderService) {
+    this.ds = new MatTableDataSource<Order>()
+    this.ds$ = this.orderService.findAll().pipe(map(data=>{this.ds.data = data
+      return this.ds;
+    }))
   }
   ngOnInit(): void {
-    this.allOrders()
+    this.pipe = new DatePipe("pt-BR")
+    this.ds.filterPredicate = (data, filter)=>{
+      if(this.fromDate && this.toDate){
+        let orderCheckin:Date = new Date(data.checkin);
+        console.log("is bigger: " + (orderCheckin >= this.fromDate))
+        console.log("is lesser: " + (orderCheckin <= this.toDate))
+        console.log("data checkin: " + data.checkin)
+        console.log("from date: " + this.fromDate)
+        console.log("to date: " + this.toDate)
+        return orderCheckin >= this.fromDate && orderCheckin <= this.toDate;
+      }
+      return true
+    }
   }
 
-  allOrders(){
-    this.orderService.findAll().subscribe(data => this.dataSource.data = data);
+  onSearchDateBetween(dates: Date[]){
+    this.fromDate = dates[0]
+    this.toDate = dates[1]
+    this.ds.filter = ''+ Math.random();
+
   }
 }

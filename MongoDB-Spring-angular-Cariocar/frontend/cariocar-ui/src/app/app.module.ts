@@ -20,7 +20,7 @@ import {FormsModule} from '@angular/forms';
 import {MatIconModule} from "@angular/material/icon";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from "@angular/material/chips";
-import { FindUserComponent } from './components/userRel/find-user/find-user.component';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSelectModule} from "@angular/material/select";
 import {MatMenuModule} from '@angular/material/menu';
@@ -29,6 +29,12 @@ import { EditUserComponent } from './components/userRel/edit-user/edit-user.comp
 import {EditCarComponent} from "./components/carRel/edit-car/edit-car.component";
 import {EditOrderComponent} from "./components/orderRel/edit-order/edit-order.component";
 import {DeleteObjComponent} from "./components/general/delete-obj/delete-obj.component";
+import { FindBarComponent } from './components/general/find-bar/find-bar.component';
+import { FindByDateComponent } from './components/general/find-by-date/find-by-date.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import { UserDetailsComponent } from './components/userRel/user-details/user-details.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -39,11 +45,13 @@ import {DeleteObjComponent} from "./components/general/delete-obj/delete-obj.com
     OrderListComponent,
     CarFormComponent,
     OrderFormComponent,
-    FindUserComponent,
     EditUserComponent,
     EditCarComponent,
     EditOrderComponent,
     DeleteObjComponent,
+    FindBarComponent,
+    FindByDateComponent,
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +70,10 @@ import {DeleteObjComponent} from "./components/general/delete-obj/delete-obj.com
     MatProgressSpinnerModule,
     MatSelectModule,
     MatMenuModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

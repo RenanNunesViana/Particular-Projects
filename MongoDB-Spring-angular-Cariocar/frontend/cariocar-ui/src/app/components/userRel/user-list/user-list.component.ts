@@ -12,8 +12,8 @@ import {map, Observable} from "rxjs";
 export class UserListComponent implements OnInit{
   displayedColumns: string[] = ['cpf', 'firstName', 'lastName', 'cel', 'options'];
   ds:MatTableDataSource<User>;
-  searchString = ''
   ds$:Observable<MatTableDataSource<User>>;
+  placeHoldMsg = "CPF ou Nome"
   ngOnInit(): void {
     this.ds.filterPredicate = function (data,filter):boolean{
       return data.firstName.toLowerCase().includes(filter)
@@ -33,9 +33,7 @@ export class UserListComponent implements OnInit{
     searchValue = searchValue.toLowerCase();
 
     this.ds.filter = searchValue;
-    this.searchString = searchValue;
 
-    console.log(this.searchString)
   }
 
   setUserToEditId(id:bigint){

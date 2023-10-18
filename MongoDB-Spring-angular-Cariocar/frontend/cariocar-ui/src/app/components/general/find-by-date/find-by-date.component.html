@@ -1,0 +1,23 @@
+<form class="date-block" [formGroup]="filterForm">
+  <div class="date-block__list">
+    <mat-form-field>
+      <input matInput
+             [matDatepicker]="fromDate"
+             placeholder="From Date"
+             formControlName="fromDate">
+      <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+      <mat-datepicker #fromDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="date-block__list">
+    <mat-form-field>
+      <input matInput
+             [matDatepicker]="toDate"
+             placeholder="To Date"
+             formControlName="toDate">
+      <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+      <mat-datepicker #toDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <button mat-button color="primary" class="primary" (click)="onSearchDateChanged()">Submit</button>
+</form>

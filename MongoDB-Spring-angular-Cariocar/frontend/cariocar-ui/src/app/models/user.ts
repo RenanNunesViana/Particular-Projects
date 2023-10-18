@@ -1,3 +1,5 @@
+import {Car} from "./car";
+
 export class User {
   id!:string|null;
   cpf!:string;
@@ -5,4 +7,5 @@ export class User {
   lastName!:string;
   cel!:string;
   email!:string;
+  cars!:Car[]
 }

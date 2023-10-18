@@ -1,5 +1,7 @@
+<app-find-by-date (searchDateBetween)="onSearchDateBetween($event)" ></app-find-by-date>
+
 <div >
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  <table mat-table *ngIf="ds$ | async as orderDataSource; else loading" [dataSource]="orderDataSource" class="mat-elevation-z8 demo-table">
     <!-- Position Column -->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef>description</th>
@@ -69,3 +71,4 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {Car} from "../../../models/car";
 import {CarService} from "../../../services/car/car.service";
-import {async} from "rxjs";
+import {async, map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-car-list',
@@ -11,55 +11,39 @@ import {async} from "rxjs";
 })
 export class CarListComponent implements OnInit{
   displayedColumns:string[] = ['plate', 'model', 'age','ownerCpf', 'options'];
-  dataSource = new MatTableDataSource<Car>();
-  //searchString:string = ''
+  ds:MatTableDataSource<Car>;
+  ds$:Observable<MatTableDataSource<Car>>
+  placeHoldMsg = "CPF do dono ou placa do carro"
 
-  /*getData() {
-  const
-  testData = [{
-    "plate": "123456789",
-    "model":"fordcar",
-    "age": 2020,
-    "ownerCpf":"123456789"
-  },
-    {
-      "plate":"987654321",
-      "model":"ferrari",
-      "age":2022,
-      "ownerCpf":"123456789"
-    }
-  ];
-    this.dataSource.data = testData;
-}*/
 
   ngOnInit(): void {
-    this.allCars();
-    this.dataSource.filterPredicate = function (data,filter):boolean{
-      return data.plate.toLowerCase().includes(filter)
+    //this.allCars();
+    this.ds.filterPredicate = function (data,filter):boolean{
+      return String(data.plate).toLowerCase().includes(filter)
         || data.ownerCpf.toLowerCase().includes(filter);
     }
-    /*this.getData();*/
   }
 
   constructor(private carService:CarService) {
+    this.ds = new MatTableDataSource<Car>()
+    this.ds$ = this.carService.findAll().pipe(map(data => {this.ds.data = data
+      return this.ds
+    }))
   }
 
-  allCars(){
+  /*allCars(){
     this.carService.findAll().subscribe(data =>{
-      this.dataSource.data = data;
+      this.ds.data = data;
       })
 
-  }
+  }*/
 
-/*
   onSearchTextEntered(searchValue:string){
     searchValue = searchValue.trim();
     searchValue = searchValue.toLowerCase();
 
-    this.dataSource.filter = searchValue;
-    this.searchString = searchValue;
+    this.ds.filter = searchValue;
 
   }
-*/
-  protected readonly async = async;
+
 }
