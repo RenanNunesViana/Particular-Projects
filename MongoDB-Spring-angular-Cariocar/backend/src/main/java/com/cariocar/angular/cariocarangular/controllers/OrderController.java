@@ -29,7 +29,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public Order getOrder(@PathVariable Long id){
         return orderService.getOrder(id);
     }

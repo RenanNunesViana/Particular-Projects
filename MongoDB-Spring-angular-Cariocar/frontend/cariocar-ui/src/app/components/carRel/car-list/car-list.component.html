@@ -49,9 +49,9 @@
 
         <button mat-button [matMenuTriggerFor]="menu">escolha</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>detalhes</button>
-          <button mat-menu-item>Editar</button>
-          <button mat-menu-item>Excluir</button>
+          <button routerLink="/car/details/{{car.plate}}" mat-menu-item>detalhes</button>
+          <button (click)="setSelectedCarPlate(car.plate)" routerLink="/car/edit/{{car.plate}}" mat-menu-item>Editar</button>
+          <button mat-menu-item (click)="openDialog(car.plate)">Excluir</button>
         </mat-menu>
 
       </td>

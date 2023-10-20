@@ -79,7 +79,11 @@ public class CarServiceImpl implements CarService{
 
     @Override
     public Car getCar(Long plate) {
-        return carRepository.findById(plate).orElseThrow(IllegalArgumentException::new);
+        Optional<Car> car = carRepository.findById(plate);
+        if(car.isPresent())
+            return car.get();
+        else
+            throw new IllegalArgumentException("Car not found!");
     }
 
     @Override

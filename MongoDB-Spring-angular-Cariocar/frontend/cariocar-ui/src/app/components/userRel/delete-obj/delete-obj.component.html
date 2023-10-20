@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Confirme</h1>
+<mat-dialog-content>
+  <p>digite o CPF do usuário</p>
+  <mat-form-field>
+    <mat-label>CPF</mat-label>
+    <input matInput [(ngModel)]="confirmedUserCpf">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoConfirmed()">Cancelar</button>
+  <button mat-button mat-dialog-close (click)="onSubmit()" [matDialogClose]="true">Confirmar</button>
+</mat-dialog-actions>

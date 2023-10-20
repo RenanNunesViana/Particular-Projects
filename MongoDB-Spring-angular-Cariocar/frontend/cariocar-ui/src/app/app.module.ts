@@ -28,13 +28,17 @@ import {MatSortModule} from "@angular/material/sort";
 import { EditUserComponent } from './components/userRel/edit-user/edit-user.component';
 import {EditCarComponent} from "./components/carRel/edit-car/edit-car.component";
 import {EditOrderComponent} from "./components/orderRel/edit-order/edit-order.component";
-import {DeleteObjComponent} from "./components/general/delete-obj/delete-obj.component";
+import {DeleteObjComponent} from "./components/userRel/delete-obj/delete-obj.component";
 import { FindBarComponent } from './components/general/find-bar/find-bar.component';
 import { FindByDateComponent } from './components/general/find-by-date/find-by-date.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import { UserDetailsComponent } from './components/userRel/user-details/user-details.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { CarDetailsComponent } from './components/carRel/car-details/car-details.component';
+import { OrderDetailsComponent } from './components/orderRel/order-details/order-details.component';
+import { DelDialogCarComponent } from './components/carRel/del-dialog-car/del-dialog-car.component';
+import { DelDialogOrderComponent } from './components/orderRel/del-dialog-order/del-dialog-order.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +56,10 @@ import {MatDialogModule} from "@angular/material/dialog";
     FindBarComponent,
     FindByDateComponent,
     UserDetailsComponent,
+    CarDetailsComponent,
+    OrderDetailsComponent,
+    DelDialogCarComponent,
+    DelDialogOrderComponent,
   ],
   imports: [
     BrowserModule,

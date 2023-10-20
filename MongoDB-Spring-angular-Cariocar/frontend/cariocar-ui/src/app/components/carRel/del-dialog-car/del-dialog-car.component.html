@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Confirme</h1>
+<mat-dialog-content>
+  <p>Tem certeza que deseja remover o carro de placa {{plate}}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoSubmit()" [matDialogClose]="false">Cancelar</button>
+  <button mat-button mat-dialog-close (click)="onSubmit()" [matDialogClose]="true">Confirmar</button>
+</mat-dialog-actions>

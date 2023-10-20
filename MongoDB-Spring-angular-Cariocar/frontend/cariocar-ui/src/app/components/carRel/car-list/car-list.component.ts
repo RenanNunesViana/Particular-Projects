@@ -3,6 +3,9 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Car} from "../../../models/car";
 import {CarService} from "../../../services/car/car.service";
 import {async, map, Observable} from "rxjs";
+import {DialogRef} from "@angular/cdk/dialog";
+import {MatDialog} from "@angular/material/dialog";
+import {DelDialogCarComponent} from "../del-dialog-car/del-dialog-car.component";
 
 @Component({
   selector: 'app-car-list',
@@ -24,7 +27,7 @@ export class CarListComponent implements OnInit{
     }
   }
 
-  constructor(private carService:CarService) {
+  constructor(private carService:CarService, public dialog:MatDialog) {
     this.ds = new MatTableDataSource<Car>()
     this.ds$ = this.carService.findAll().pipe(map(data => {this.ds.data = data
       return this.ds
@@ -46,4 +49,16 @@ export class CarListComponent implements OnInit{
 
   }
 
+  setSelectedCarPlate(plate:string){
+    this.carService.setSelectedCarPlate(plate);
+  }
+
+  openDialog(plate:bigint){
+    this.dialog.open(DelDialogCarComponent, {
+      width:'390px',
+      data:{
+        plate:plate
+      }
+    });
+  }
 }

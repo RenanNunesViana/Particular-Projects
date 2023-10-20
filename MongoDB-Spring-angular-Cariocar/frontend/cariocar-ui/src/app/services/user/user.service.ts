@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpContext, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from "rxjs";
 import {User} from "../../models/user";
 import {FormControl, ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
@@ -43,8 +43,13 @@ export class UserService {
     return this.http.post<User>(this.userUrl + '/adduser', user);
   }
 
-  public delete(id:bigint){
-    this.http.delete<User>(this.userUrl + `/${id}`)
+  public deleteById(id:bigint){
+    return this.http.delete<User>(this.userUrl + `/${id}`)
+  }
+
+  //problema nessa poha
+  public deleteByCpf(cpf:string){
+    return this.http.delete<User>(this.userUrl + `/delete?cpf=` + cpf)
   }
 
   public edit(id: bigint, user: ɵTypedOrUntyped<{

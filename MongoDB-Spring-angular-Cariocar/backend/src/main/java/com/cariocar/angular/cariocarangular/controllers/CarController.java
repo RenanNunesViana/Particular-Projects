@@ -27,7 +27,7 @@ public class CarController {
     }
 
     @GetMapping(value = "/{plate}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public Car getCar(@PathVariable Long plate){
         return carService.getCar(plate);
     }

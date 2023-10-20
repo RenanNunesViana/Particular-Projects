@@ -49,7 +49,7 @@
       <mat-menu #menu="matMenu">
         <button routerLink="/user/details/{{user.id}}" mat-menu-item>detalhes</button>
         <button (click)="setUserToEditId(user.id)" routerLink="/user/edit/{{user.id}}" mat-menu-item>Editar</button>
-        <button routerLink="#" mat-menu-item>Excluir</button>
+        <button mat-menu-item class="btn btn-danger" (click)="openDialog(user.cpf)">Excluir</button>
       </mat-menu>
 
     </td>

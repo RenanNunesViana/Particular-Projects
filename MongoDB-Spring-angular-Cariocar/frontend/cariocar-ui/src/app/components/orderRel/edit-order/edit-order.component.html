@@ -1,1 +1,37 @@
-<p>edit-order works!</p>
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit(String(orderToEditId))">
+  <mat-form-field>
+    <mat-label>Descrição</mat-label>
+    <input matInput formControlName="description">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Observação</mat-label>
+    <input matInput formControlName="note">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>CPF do cliente</mat-label>
+    <input matInput formControlName="customerCpf">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Placa</mat-label>
+    <input matInput formControlName="carPlate">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Orçamento</mat-label>
+    <input matInput formControlName="quote">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Valor pago</mat-label>
+    <input matInput formControlName="paymentMade">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Estatus do pagamento</mat-label>
+    <mat-select>
+      <mat-option [value]="paymentStatsOption[0]">Aberta</mat-option>
+      <mat-option [value]="paymentStatsOption[1]">Parcial</mat-option>
+      <mat-option [value]="paymentStatsOption[2]">Fechada</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>Complete the form to enable button.</p>
+  <button type="submit">Submit</button>
+</form>
+

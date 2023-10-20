@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
 import {Order} from "../../../models/order";
 import {OrderService} from "../../../services/order/order.service";
 import {map, Observable} from "rxjs";
 import {DatePipe} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
+import {DelDialogOrderComponent} from "../del-dialog-order/del-dialog-order.component";
 
 @Component({
   selector: 'app-order-list',
@@ -19,7 +20,7 @@ export class OrderListComponent implements OnInit{
   toDate!:Date
   pipe!:DatePipe;
 
-  constructor(private orderService:OrderService) {
+  constructor(private orderService:OrderService, public dialog:MatDialog) {
     this.ds = new MatTableDataSource<Order>()
     this.ds$ = this.orderService.findAll().pipe(map(data=>{this.ds.data = data
       return this.ds;
@@ -46,5 +47,17 @@ export class OrderListComponent implements OnInit{
     this.toDate = dates[1]
     this.ds.filter = ''+ Math.random();
 
+  }
+
+  openDialog(id:number){
+    this.dialog.open(DelDialogOrderComponent, {
+      width:'390px',
+      data:{
+        orderId: id
+      }
+    })
+  }
+  setOrderToEditId(orderId:string){
+    this.orderService.setOrderToEditId(BigInt(orderId));
   }
 }

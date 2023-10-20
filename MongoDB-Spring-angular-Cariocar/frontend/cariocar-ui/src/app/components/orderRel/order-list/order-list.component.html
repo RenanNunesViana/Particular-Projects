@@ -59,9 +59,9 @@
 
         <button mat-button [matMenuTriggerFor]="menu">escolha</button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>detalhes</button>
-          <button mat-menu-item>Editar</button>
-          <button mat-menu-item>Excluir</button>
+          <button mat-menu-item routerLink="/order/details/{{order.id}}">detalhes</button>
+          <button mat-menu-item (click)="setOrderToEditId(order.id)" routerLink="/order/edit/{{order.id}}">Editar</button>
+          <button mat-menu-item (click)="openDialog(order.id)">Excluir</button>
         </mat-menu>
 
       </td>

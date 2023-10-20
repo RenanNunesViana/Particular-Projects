@@ -3,7 +3,8 @@ import {User} from "../../../models/user";
 import {UserService} from "../../../services/user/user.service";
 import {MatTableDataSource} from '@angular/material/table';
 import {map, Observable} from "rxjs";
-
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteObjComponent} from "../delete-obj/delete-obj.component";
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -21,7 +22,7 @@ export class UserListComponent implements OnInit{
         || data.cpf.toLowerCase().includes(filter);
     }
   }
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, public dialog:MatDialog) {
     this.ds = new MatTableDataSource;
     this.ds$ = this.userService.findAll().pipe(map(data => {this.ds.data = data
       return this.ds;
@@ -38,5 +39,13 @@ export class UserListComponent implements OnInit{
 
   setUserToEditId(id:bigint){
     this.userService.setUserToEditId(id);
+  }
+
+  openDialog(cpf:string){
+    const dialogRef = this.dialog.open(DeleteObjComponent, {
+      width:'390px',
+      data:{
+        cpf:cpf
+      }});
   }
 }
