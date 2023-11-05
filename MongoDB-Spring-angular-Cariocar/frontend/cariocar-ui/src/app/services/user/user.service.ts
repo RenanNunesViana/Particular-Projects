@@ -3,6 +3,7 @@ import {HttpClient, HttpContext, HttpHeaders, HttpParams} from '@angular/common/
 import {BehaviorSubject, Observable} from "rxjs";
 import {User} from "../../models/user";
 import {FormControl, ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
+import {environment} from "../../../environments/environment.development";
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class UserService {
   private userToEditId$ = new BehaviorSubject<any>({});
   selectedUserId$ = this.userToEditId$.asObservable();
   constructor( private http:HttpClient) {
-    this.userUrl = "http://localhost:8080/api/cariocar"
+    this.userUrl = environment.link
   }
 
   public findAll():Observable<User[]>{

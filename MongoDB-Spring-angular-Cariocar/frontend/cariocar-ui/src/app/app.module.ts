@@ -39,6 +39,7 @@ import { CarDetailsComponent } from './components/carRel/car-details/car-details
 import { OrderDetailsComponent } from './components/orderRel/order-details/order-details.component';
 import { DelDialogCarComponent } from './components/carRel/del-dialog-car/del-dialog-car.component';
 import { DelDialogOrderComponent } from './components/orderRel/del-dialog-order/del-dialog-order.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -61,28 +62,29 @@ import { DelDialogOrderComponent } from './components/orderRel/del-dialog-order/
     DelDialogCarComponent,
     DelDialogOrderComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatButtonModule,
-    FormsModule,
-    MatIconModule,
-    MatAutocompleteModule,
-    MatChipsModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatMenuModule,
-    MatSortModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatDialogModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatInputModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatButtonModule,
+        FormsModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatMenuModule,
+        MatSortModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatDialogModule,
+        NgOptimizedImage
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

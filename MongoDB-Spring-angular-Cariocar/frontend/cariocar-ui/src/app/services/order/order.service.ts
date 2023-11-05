@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {Order} from "../../models/order";
 import {BehaviorSubject, Observable} from "rxjs";
 import {FormControl, ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
+import {environment} from "../../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private readonly orderUrl = "http://localhost:8080/api/cariocar/order"
+  private readonly orderUrl = `${environment.link}/order`
 
   private orderToEditId$ = new BehaviorSubject<any>({})
   selectedOrderToEditId$ = this.orderToEditId$.asObservable()

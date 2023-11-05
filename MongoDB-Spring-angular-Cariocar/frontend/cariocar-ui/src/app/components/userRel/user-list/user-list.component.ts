@@ -14,7 +14,7 @@ export class UserListComponent implements OnInit{
   displayedColumns: string[] = ['cpf', 'firstName', 'lastName', 'cel', 'options'];
   ds:MatTableDataSource<User>;
   ds$:Observable<MatTableDataSource<User>>;
-  placeHoldMsg = "CPF ou Nome"
+  placeHoldMsg = "CPF ou Nome";
   ngOnInit(): void {
     this.ds.filterPredicate = function (data,filter):boolean{
       return data.firstName.toLowerCase().includes(filter)

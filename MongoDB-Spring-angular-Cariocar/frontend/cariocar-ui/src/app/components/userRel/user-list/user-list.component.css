@@ -1,6 +1,85 @@
-table {
+h1{
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 90px;
+}
+
+.demo-table{
+  background-color: transparent;
   width: 100%;
 }
-.example-form-field {
-  width: 200px;
+
+.mat-header-row{
+
 }
+
+.mat-column-cpf{
+
+  width: 15%;
+  color: white;
+  padding-left: 0px;
+}
+
+table{
+  margin-left: 16px;
+}
+
+tfoot{
+  height: 200px;
+}
+
+.mat-elevation-z8{
+  box-shadow: none;
+}
+
+.mdc-data-table{
+  min-height: 800px;
+}
+
+.mat-column-firstName{
+  color: white;
+
+}
+
+.mat-column-lastName{
+  color: white;
+}
+
+.mat-column-cel{
+  color: white;
+}
+
+.mat-column-options{
+  color: white;
+  border-right: transparent;
+
+}
+
+td{
+  border-right: 1px rgba(222, 209, 209, 0.4) dashed;
+
+}
+
+th{
+  border-bottom: 1px rgba(222, 209, 209, 0.4) solid;
+  margin-bottom: 10px;
+}
+
+.mat-mdc-header-row{
+  height: 0;
+  border-spacing: 100px;
+}
+
+#searchBar{
+  display: inline-block;
+  margin-left: 16px;
+  padding-bottom: 16px;
+}
+
+#toggle-button{
+  background-color: #C02424;
+  padding-right: 40px;
+  padding-left: 40px;
+  border-radius: 27px;
+}
+

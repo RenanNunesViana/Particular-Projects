@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Car} from "../../models/car";
 import {FormControl, ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
+import {environment} from "../../../environments/environment.development";
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class CarService {
   private carToEditPlate$ = new BehaviorSubject<any>({})
   selectedCarPlate$=this.carToEditPlate$.asObservable()
   constructor( private http:HttpClient) {
-    this.carUrl = "http://localhost:8080/api/cariocar/car"
+    this.carUrl = `${environment.link}/car`
   }
 
   public findAll():Observable<Car[]>{

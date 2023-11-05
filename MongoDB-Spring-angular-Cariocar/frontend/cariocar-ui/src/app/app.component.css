@@ -1,14 +1,33 @@
 body {
   margin: 0;
   padding: 0;
+  background-image: linear-gradient(to right, #142237, #142237,#000000,#000000);
+  width: 100%;
+}
+
+h1{
+  text-align: center;
+}
+
+hr{
+  border-color: rgba(222, 209, 209, 0.4);
+  margin-right: 200px;
 }
 
 /* Estilos para o cabeçalho */
 header {
-  background-color: #333; /* Cor de fundo do cabeçalho */
+  background-image: linear-gradient(to right, #142237, #142237,#000000,#000000); /* Cor de fundo do cabeçalho */
   color: #fff; /* Cor do texto no cabeçalho */
-  text-align: center; /* Alinhar o texto ao centro */
+  text-align: left; /* Alinhar o texto a esquerda*/
   padding: 20px; /* Espaçamento interno no cabeçalho */
+  height: 50px;
+  margin-bottom: 40px;
+}
+
+img{
+  top: 0;
+  right: 0;
+  position: absolute;
 }
 
 /* Estilos para o menu de navegação no cabeçalho */
@@ -20,6 +39,11 @@ nav ul {
 nav ul li {
   display: inline;
   margin-right: 20px; /* Espaçamento entre os itens do menu */
+}
+
+a{
+  color: white;
+  text-decoration: none;
 }
 
 /* Estilos para o rodapé */

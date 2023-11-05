@@ -1,6 +1,7 @@
-<app-find-bar (searchTextChanged)="onSearchTextEntered($event)" [placeHold]="placeHoldMsg" ></app-find-bar>
+<h1>Lista de Clientes</h1>
+<app-find-bar (searchTextChanged)="onSearchTextEntered($event)" [placeHold]="placeHoldMsg" id="searchBar"></app-find-bar>
 
-<div >
+<div class="allContent">
 <table *ngIf="ds$ | async as userDataSource; else loading" mat-table [dataSource]="userDataSource" class="mat-elevation-z8 demo-table">
   <!-- Cpf Column -->
   <ng-container matColumnDef="cpf">
@@ -45,7 +46,7 @@
     <th mat-header-cell *matHeaderCellDef>Opções</th>
     <td mat-cell *matCellDef="let user">
 
-      <button mat-button [matMenuTriggerFor]="menu">escolha</button>
+      <button mat-button id="toggle-button" [matMenuTriggerFor]="menu">escolha</button>
       <mat-menu #menu="matMenu">
         <button routerLink="/user/details/{{user.id}}" mat-menu-item>detalhes</button>
         <button (click)="setUserToEditId(user.id)" routerLink="/user/edit/{{user.id}}" mat-menu-item>Editar</button>
