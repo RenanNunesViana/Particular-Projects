@@ -1,7 +1,7 @@
 <!--<app-car-list (searchTextChanged)="onSearchTextEntered($event)"  ></app-car-list>-->
 <app-find-bar (searchTextChanged)="onSearchTextEntered($event)" [placeHold]="placeHoldMsg"></app-find-bar>
 <div>
-  <table *ngIf="ds$ | async as carDataSource; else loading" mat-table [dataSource]="carDataSource" class="mat-elevation-z8 demo-table">
+  <table *ngIf="ds$ | async; else loading" mat-table [dataSource]="ds" class="mat-elevation-z8 demo-table">
     <!-- Plate Column -->
     <ng-container matColumnDef="plate">
       <th mat-header-cell *matHeaderCellDef>Plate</th>
@@ -47,7 +47,7 @@
       <th mat-header-cell *matHeaderCellDef>Opções</th>
       <td mat-cell *matCellDef="let car">
 
-        <button mat-button [matMenuTriggerFor]="menu">escolha</button>
+        <button mat-button id="toggle-button" [matMenuTriggerFor]="menu">escolha</button>
         <mat-menu #menu="matMenu">
           <button routerLink="/car/details/{{car.plate}}" mat-menu-item>detalhes</button>
           <button (click)="setSelectedCarPlate(car.plate)" routerLink="/car/edit/{{car.plate}}" mat-menu-item>Editar</button>

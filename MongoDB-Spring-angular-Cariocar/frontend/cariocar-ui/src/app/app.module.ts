@@ -40,6 +40,9 @@ import { OrderDetailsComponent } from './components/orderRel/order-details/order
 import { DelDialogCarComponent } from './components/carRel/del-dialog-car/del-dialog-car.component';
 import { DelDialogOrderComponent } from './components/orderRel/del-dialog-order/del-dialog-order.component';
 import {NgOptimizedImage} from "@angular/common";
+import { MenuComponent } from './components/general/menu/menu.component';
+import { MyCustomPaginatorIntlComponent } from './components/general/my-custom-paginator-intl/my-custom-paginator-intl.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -61,6 +64,8 @@ import {NgOptimizedImage} from "@angular/common";
     OrderDetailsComponent,
     DelDialogCarComponent,
     DelDialogOrderComponent,
+    MenuComponent,
+    MyCustomPaginatorIntlComponent,
   ],
     imports: [
         BrowserModule,
@@ -83,7 +88,8 @@ import {NgOptimizedImage} from "@angular/common";
         MatDatepickerModule,
         MatNativeDateModule,
         MatDialogModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        MatPaginatorModule
     ],
   providers: [],
   bootstrap: [AppComponent]

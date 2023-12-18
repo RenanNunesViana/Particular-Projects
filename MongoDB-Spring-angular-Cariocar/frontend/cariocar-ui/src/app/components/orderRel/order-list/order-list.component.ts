@@ -15,16 +15,16 @@ import {DelDialogOrderComponent} from "../del-dialog-order/del-dialog-order.comp
 export class OrderListComponent implements OnInit{
   displayedColumns:string[] = ['description','customerCpf','checkin','quote','paymentStats', 'options']
   ds:MatTableDataSource<Order>;
-  ds$:Observable<MatTableDataSource<Order>>
+  ds$:Observable<Order[]>
   fromDate!: Date
   toDate!:Date
   pipe!:DatePipe;
 
   constructor(private orderService:OrderService, public dialog:MatDialog) {
     this.ds = new MatTableDataSource<Order>()
-    this.ds$ = this.orderService.findAll().pipe(map(data=>{this.ds.data = data
-      return this.ds;
-    }))
+    this.ds$ = this.orderService.findAll()
+    this.ds$.subscribe(data => this.ds.data = data);
+
   }
   ngOnInit(): void {
     this.pipe = new DatePipe("pt-BR")

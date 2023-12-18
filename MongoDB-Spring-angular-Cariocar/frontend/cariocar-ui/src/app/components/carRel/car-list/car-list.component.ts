@@ -15,7 +15,7 @@ import {DelDialogCarComponent} from "../del-dialog-car/del-dialog-car.component"
 export class CarListComponent implements OnInit{
   displayedColumns:string[] = ['plate', 'model', 'age','ownerCpf', 'options'];
   ds:MatTableDataSource<Car>;
-  ds$:Observable<MatTableDataSource<Car>>
+  ds$:Observable<Car[]>
   placeHoldMsg = "CPF do dono ou placa do carro"
 
 
@@ -29,17 +29,14 @@ export class CarListComponent implements OnInit{
 
   constructor(private carService:CarService, public dialog:MatDialog) {
     this.ds = new MatTableDataSource<Car>()
-    this.ds$ = this.carService.findAll().pipe(map(data => {this.ds.data = data
+    /*this.ds$ = this.carService.findAll().pipe(map(data => {this.ds.data = data
       return this.ds
-    }))
+    }))*/
+
+    this.ds$ = this.carService.findAll()
+
+    this.ds$.subscribe(data => this.ds.data = data)
   }
-
-  /*allCars(){
-    this.carService.findAll().subscribe(data =>{
-      this.ds.data = data;
-      })
-
-  }*/
 
   onSearchTextEntered(searchValue:string){
     searchValue = searchValue.trim();

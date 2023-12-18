@@ -1,0 +1,96 @@
+h1{
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 90px;
+}
+
+.demo-table{
+  background-color: transparent;
+  width: 100%;
+}
+
+.mat-header-row{
+
+}
+
+.mat-column-description{
+
+  width: 15%;
+  color: white;
+  padding-left: 0;
+}
+
+table{
+  margin-left: 16px;
+}
+
+tfoot{
+  height: 200px;
+}
+
+.mat-elevation-z8{
+  box-shadow: none;
+}
+
+.mdc-data-table{
+  min-height: 800px;
+}
+
+.mat-column-customerCpf{
+  color: white;
+
+}
+
+.mat-column-checkin{
+  color: white;
+}
+
+.mat-column-quote{
+  color: white;
+}
+
+.mat-column-paymentStats{
+  color: white;
+}
+
+.mat-column-options{
+  color: white;
+  border-right: transparent;
+
+}
+
+td{
+  border-right: 1px rgba(222, 209, 209, 0.4) dashed;
+
+}
+
+th{
+  border-bottom: 1px rgba(222, 209, 209, 0.4) solid;
+  margin-bottom: 10px;
+}
+
+.mat-mdc-header-row{
+  height: 0;
+  border-spacing: 100px;
+}
+
+#searchBar{
+  display: inline-block;
+  margin-left: 16px;
+  padding-bottom: 16px;
+}
+
+#toggle-button{
+  background-color: #C02424;
+  padding-right: 40px;
+  padding-left: 40px;
+  border-radius: 27px;
+}
+
+.mat-mdc-paginator{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+

@@ -2,7 +2,7 @@
 <app-find-bar (searchTextChanged)="onSearchTextEntered($event)" [placeHold]="placeHoldMsg" id="searchBar"></app-find-bar>
 
 <div class="allContent">
-<table *ngIf="ds$ | async as userDataSource; else loading" mat-table [dataSource]="userDataSource" class="mat-elevation-z8 demo-table">
+<table *ngIf="ds$ | async; else loading" mat-table [dataSource]="ds" class="mat-elevation-z8 demo-table">
   <!-- Cpf Column -->
   <ng-container matColumnDef="cpf">
     <th mat-header-cell *matHeaderCellDef>CPF</th>
@@ -50,7 +50,7 @@
       <mat-menu #menu="matMenu">
         <button routerLink="/user/details/{{user.id}}" mat-menu-item>detalhes</button>
         <button (click)="setUserToEditId(user.id)" routerLink="/user/edit/{{user.id}}" mat-menu-item>Editar</button>
-        <button mat-menu-item class="btn btn-danger" (click)="openDialog(user.cpf)">Excluir</button>
+        <button (click)="openDialog(user.cpf)" mat-menu-item>Excluir</button>
       </mat-menu>
 
     </td>
@@ -61,3 +61,4 @@
 </table>
 </div>
 <ng-template #loading><mat-spinner></mat-spinner></ng-template>
+<mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page" [showFirstLastButtons]=true></mat-paginator>

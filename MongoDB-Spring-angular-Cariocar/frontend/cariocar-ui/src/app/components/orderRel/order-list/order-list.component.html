@@ -1,7 +1,9 @@
+<h1>Lista de Carros</h1>
+
 <app-find-by-date (searchDateBetween)="onSearchDateBetween($event)" ></app-find-by-date>
 
 <div >
-  <table mat-table *ngIf="ds$ | async as orderDataSource; else loading" [dataSource]="orderDataSource" class="mat-elevation-z8 demo-table">
+  <table mat-table *ngIf="ds$ | async ; else loading" [dataSource]="ds" class="mat-elevation-z8 demo-table">
     <!-- Position Column -->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef>description</th>
@@ -57,7 +59,7 @@
       <th mat-header-cell *matHeaderCellDef>Opções</th>
       <td mat-cell *matCellDef="let order">
 
-        <button mat-button [matMenuTriggerFor]="menu">escolha</button>
+        <button mat-button id="toggle-button" [matMenuTriggerFor]="menu">escolha</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item routerLink="/order/details/{{order.id}}">detalhes</button>
           <button mat-menu-item (click)="setOrderToEditId(order.id)" routerLink="/order/edit/{{order.id}}">Editar</button>
@@ -72,3 +74,4 @@
   </table>
 </div>
 <ng-template #loading><mat-spinner></mat-spinner></ng-template>
+<mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page" [showFirstLastButtons]=true></mat-paginator>

@@ -6,6 +6,7 @@ import {CarListComponent} from "./components/carRel/car-list/car-list.component"
 import {CarFormComponent} from "./components/carRel/car-form/car-form.component";
 import {OrderListComponent} from "./components/orderRel/order-list/order-list.component";
 import {OrderFormComponent} from "./components/orderRel/order-form/order-form.component";
+import {MenuComponent} from "./components/general/menu/menu.component";
 
 const routes: Routes = [
   {path:'user', loadChildren:()=>import('./modules/user/user.module')
@@ -16,6 +17,9 @@ const routes: Routes = [
   },
   {path:'order', loadChildren:()=>import('./modules/order/order.module')
       .then(mod=>mod.OrderModule)
+  },
+  {
+    path:'', component:MenuComponent
   }
 ];
 

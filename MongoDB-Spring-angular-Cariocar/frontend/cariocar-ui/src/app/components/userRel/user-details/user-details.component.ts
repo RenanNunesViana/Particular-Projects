@@ -16,11 +16,11 @@ export class UserDetailsComponent implements OnInit{
   }
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('userId')
-    this.getUser(this.userId)
+    this.getUser(String(this.userId))
   }
 
-  getUser(id:string | null){
-    // @ts-ignore
+  getUser(id:string){
+
     this.userService.findUser(BigInt(id)).subscribe(data => this.user = data);
   }
 

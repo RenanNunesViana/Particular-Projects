@@ -17,7 +17,7 @@ h1{
 
   width: 15%;
   color: white;
-  padding-left: 0px;
+  padding-left: 0;
 }
 
 table{
@@ -81,5 +81,12 @@ th{
   padding-right: 40px;
   padding-left: 40px;
   border-radius: 27px;
+}
+
+.mat-mdc-paginator{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 

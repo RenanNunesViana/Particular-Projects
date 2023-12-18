@@ -13,7 +13,8 @@ import {DeleteObjComponent} from "../delete-obj/delete-obj.component";
 export class UserListComponent implements OnInit{
   displayedColumns: string[] = ['cpf', 'firstName', 'lastName', 'cel', 'options'];
   ds:MatTableDataSource<User>;
-  ds$:Observable<MatTableDataSource<User>>;
+  /*ds$:Observable<MatTableDataSource<User>>;*/
+  ds$:Observable<User[]>;
   placeHoldMsg = "CPF ou Nome";
   ngOnInit(): void {
     this.ds.filterPredicate = function (data,filter):boolean{
@@ -24,9 +25,14 @@ export class UserListComponent implements OnInit{
   }
   constructor(private userService: UserService, public dialog:MatDialog) {
     this.ds = new MatTableDataSource;
-    this.ds$ = this.userService.findAll().pipe(map(data => {this.ds.data = data
+    /*this.ds$ = this.userService.findAll().pipe(map(data => {this.ds.data = data
       return this.ds;
-    }));
+    }));*/
+    /*this.userService.findAll().subscribe(data => this.ds.data = data)*/
+
+    this.ds$ = this.userService.findAll()
+
+    this.ds$.subscribe(data => this.ds.data = data)
   }
 
   onSearchTextEntered(searchValue:string){
