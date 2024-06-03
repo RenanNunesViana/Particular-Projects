@@ -17,10 +17,6 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-/* 	public UserService(UserRepository userRepository){
-		this.userRepository = userRepository;
-	} */
-
 	public User getByCpf(String cpf) {
 		return userRepository.findByCpf(cpf).orElseThrow(() -> new UserNotFoundException(cpf));
 
@@ -46,7 +42,7 @@ public class UserService {
 	}
 
 	public void deleteUser(Long id) {
-		// getById is just to send an exception if needed
+		// getById is to send an exception if user does not exist
 		getById(id);
 		userRepository.deleteById(id);
 	}

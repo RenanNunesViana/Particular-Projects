@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.example.demo.exception.OrderAlreadyExistException;
 import com.example.demo.exception.OrderNotFoundException;
 import com.example.demo.model.Order;
+import com.example.demo.repositories.CarRepository;
 import com.example.demo.repositories.OrderRepository;
+import com.example.demo.repositories.UserRepository;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -18,8 +20,32 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	OrderRepository orderRepository;
 
+	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
+	CarRepository carRepository;
+	//junit test with this class does not work. figuring out how to implement test using this private method
+	/* private void checkIfUserAndCarExist(String cpf, String plate){
+		Optional<User> user = userRepository.findByCpf(cpf);
+		Optional<Car> car = carRepository.findById(plate);
+		if(user.isEmpty())
+			throw new UserNotFoundException(cpf);
+		if(car.isEmpty())
+			throw new CarNotFoundException(plate);
+	} */
+
 	@Override
 	public Order createOrder(Order order) {
+		//checkIfUserAndCarExist(order.getCustomerCpf(), order.getCarPlate());
+		
+		// i tryed test using other repositories without that private method. Error in Mock junit5 persist.
+		/* Optional<User> user = userRepository.findByCpf(order.getCustomerCpf());
+		Optional<Car> car = carRepository.findById(order.getCarPlate());
+		if(user.isEmpty())
+			throw new UserNotFoundException(order.getCustomerCpf());
+		if(car.isEmpty())
+			throw new CarNotFoundException(order.getCarPlate()); */
 		if(order.getId() == null)
 			return orderRepository.save(order);
 		else{
@@ -37,6 +63,11 @@ public class OrderServiceImpl implements OrderService {
 	public Order editOrder(Long id, Order order) {
 		Optional<Order> orderOpt = orderRepository.findById(id);
 		if (orderOpt.isPresent()) {
+			/* Boolean cpfIsNotEqual = orderOpt.get().getCustomerCpf() != order.getCustomerCpf();
+			Boolean plateIsNotEqual = orderOpt.get().getCarPlate() != order.getCarPlate();
+			if(cpfIsNotEqual || plateIsNotEqual)
+				checkIfUserAndCarExist(order.getCustomerCpf(), order.getCarPlate()); */
+			
 			Order orderTmp = orderOpt.get();
 			orderTmp.setCheckin(order.getCheckin());
 			orderTmp.setCheckout(order.getCheckout());
